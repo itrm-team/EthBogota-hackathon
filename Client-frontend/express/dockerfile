@@ -1,0 +1,9 @@
+
+ARG NODE_VERSION=18.10.0
+FROM node:${NODE_VERSION}-alpine as pkg-base
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install 
+
+EXPOSE 8080
+CMD [ "node", "index.js" ]

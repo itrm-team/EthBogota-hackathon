@@ -1,0 +1,41 @@
+WORKFLOW:
+  COMPONENTES:
+    BOTONES: 
+      ☐ BTN_GRANDE
+      ☐ BTN_MENU
+      ☐ BTN_ICON
+      ☐ BTN_ICON-SMALL
+      ☐ BTN_CASH
+    FORM:
+      ☐ FRM_INPUT
+      ☐ FRM_CHECKBOX
+      ☐ FRM_SELECT
+      ☐ FRM_INPUT-SELECT
+      ☐ FRM_FILE
+    OTHERS:
+      ☐ TITLE
+      ☐ SUBTITLE
+      ☐ POP-UP
+  VISTAS:
+    ☐ SPLASH
+    ☐ TUTORIAL
+    ☐ LOGIN
+    ☐ REGISTER
+
+
+Pendientes:
+
+0. Registro: 
+    términos y condiciones no redirige. redirige a nueva página
+    registro luego a verificación con correo.
+
+1. Login 
+
+2. Vista viio
+  lista de tipos de cambio, a como en la plataforma está la tasa de cambio por moneda
+  trabajar con ExchangeRates = { id_currency, buy_rate, sell_rate }
+
+
+
+
+

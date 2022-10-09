@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b00490b0-f49c-4bd4-8767-908eace59e8a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Backend-refactor/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend-refactor/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1296.9d904925a1d49f6782e9.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1374.3eafdc35dc6ce5c1a65e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1489.79b675818e1aca58ee7e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1575.20fd786e8460f3bc6e16.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1602.f556bcedd6e544ec472a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1605.0be473df53a11ee8242c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1709.f243490c1e21bdb6acce.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1790.e21a85ac98ead82fd649.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1855.044bfd7aa2474632d446.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/1990.a73dde9dcfaace825544.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/2016.9a49a92dbcd29e7f7bbb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/212.9adf40b0fc728b032f53.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/2131.512a10852ad3c545d87b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/2191.7d4ae00a160f88e3fded.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/2411.809c557624233371f1e9.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/2850.d56ef2f98d11a8ae85fe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/305.4be6b1d829ec95440ad5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/3087.7d01b704b2b6b7a21cf7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/3122.ed08c1a2751d3aa505c7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/3272.c034d7f07594cfe0f8e5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/3527.69e07de058d1eb44619c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/392.b6852ef6c6cb2b2d8619.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/3rdpartylicenses.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/4195.ae41fd559cb80ba31a1a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/431.c113ebdb079aaa92f56b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/4513.84f552423edc175a0274.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/4694.4ef3cdf70147e8f4620f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5043.138c89babac983715b4d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5174.1bd160ee6be5de459f8e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5277.abe110dc7581ec28cc69.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5393.49b3dc8a65d535db7b0d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5495.0353163987cc2a577a01.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5698.ce31e4a21364c5bff08d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5830.9724b1c0b9fa4be34662.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/5850.4b7a4f6586b1ddad21f2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/592.c9560ea46f7baf31ae87.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6034.2e39931fb19cf7da28f0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6036.97ddebea7684cfc70264.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6108.492bfb682b579891e06f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6164.6633f4f2bb7838a2a53b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6272.b85a2eaa5b686fcc8efe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6316.901b0ead7abce6f291f8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6522.cf78c501d97c39023285.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6682.7073b178774a72fd3de3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6745.7eae23617dae954a2766.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/6911.82497a75780539370629.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7089.d40c57edc90973e1ce34.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7110.92a42ded8fe08a9601bb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7162.03d3cb0017871ead1447.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7268.9bc498edb3782c3ec291.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7276.68333caf5c263828bba6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7321.99a049dab76b3895ee47.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7509.6428f5e5dd276339b0e5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7757.2d5ec6ae0b1bfa4d1df4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7802.62996815e96f5dab6db4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7895.a84c21f0a779cca33c83.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/7896.620ac347f330a019ef29.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/801.236028aba4bc6ddcf81e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8056.f500d2ccf098dff31823.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/862.d5791bb3851a5aee870f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8643.89440f84445e8f45a43d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8669.43d960b6c1554a9c815f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8683.cabfe75d2fa61c797089.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8695.c3440be4a76d72ef28db.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8708.a6ea42c3d84970ec77c3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8810.512dd1d80a508d3e69c5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8837.3ae6f23e0449f5e257ef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/8991.c4d812f9140d27013190.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/9005.2d4f6fdd91d76eaa27a5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/9072.22590dd465709d1adddc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/9222.376ceb5e5762979f00b9.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/937.54a8a7678adedb0d56c1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/9513.fe63fca26bdfb3304406.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/9695.da24cb50371e30da224a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/9912.18dd2d8cb459d8862874.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/9921.852c77679340cfbc0218.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/assets/icon/countries/USDC.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../express/public/assets/icon/countries/USDC.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/assets/images/LOGO SYMB.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../express/public/assets/images/LOGO SYMB.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/assets/styles/setup.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../express/public/assets/styles/setup.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/common.9a42845c3dc65988daef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/iconSet01.bc0acfb0df624894a4e3.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/iconSet02.0753926e9e2e51d6654c.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../express/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/main.5cf923752b2167c4bb70.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/polyfills-core-js.c132c61e7b3e09049420.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/polyfills-css-shim.2bb4ad533f06f7474f9b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/polyfills-dom.e16224ae2c0a0ce2820e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/polyfills.329c75d3ba0edd1956b4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/runtime.5faaffc6cb5545b39bc1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../express/public/styles.34cc42584002c98f5060.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Santiago\.android\avd\Pixel_2_API_30.avd]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
+  <component name="ProjectId" id="2Eot349FowEph1nvqOkq0m5C7LR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="android.app.main" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b00490b0-f49c-4bd4-8767-908eace59e8a" name="Changes" comment="" />
+      <created>1663273564934</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1663273564934</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

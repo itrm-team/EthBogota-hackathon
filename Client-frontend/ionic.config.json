@@ -1,0 +1,7 @@
+{
+  "name": "MultiCash",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "MultiCash",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

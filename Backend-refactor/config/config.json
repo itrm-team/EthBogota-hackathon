@@ -1,0 +1,37 @@
+{
+  "development": {
+    "username": "hdjthqpv",
+    "password": "ffIaYdkkYUvl60fRi3JsJ2SLniSjRX2Q",
+    "database": "hdjthqpv",
+    "host": "jelani.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "development2": {
+    "username": "hdjthqpv",
+    "password": "ffIaYdkkYUvl60fRi3JsJ2SLniSjRX2Q",
+    "database": "hdjthqpv",
+    "host": "jelani.db.elephantsql.com",
+    "dialect": "postgres"   
+  },
+  "test": {
+    "username": "hdjthqpv",
+    "password": "ffIaYdkkYUvl60fRi3JsJ2SLniSjRX2Q",
+    "database": "hdjthqpv",
+    "host": "lallah.db.elephantsql.com",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "local":  {
+    "username": "postgres",
+    "password": "password",
+    "database": "postgres",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
