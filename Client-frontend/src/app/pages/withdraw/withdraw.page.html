@@ -1,0 +1,575 @@
+<ion-content>
+  <swiper #withdrawSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Retirar'" (backEvent)="changeSlide('home')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <app-pair-input [info]=1 (withdrawPayload)="processInitialPayload($event)"></app-pair-input>
+      </div>
+      <div class="withdraw__btn">
+        <app-button [label]="'Siguiente'" [disable]="!(balance>=amountTransaccion && maxLimitExchange>=amountTransaccion && amountTransaccion>=minLimitExchange)" 
+          (click)="balance>=amountTransaccion && maxLimitExchange>=amountTransaccion && amountTransaccion>=minLimitExchange && setReference()"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Retirar'" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <form>
+
+          <!-- Parameters titular name -->
+          <label for="sign-up_phone">*Nombre del titular de la cuenta</label>
+          <input type="text" id="sign-up_username" name="transfer_username"
+          [(ngModel)]="recipientName" disabled/>
+
+          <div class="msg_alert">
+            
+          </div>
+
+          <!-- Parameters AUD -->
+          <div *ngIf="recipientCurrency=='AUD'">
+
+            <label for="bsbCode">*BSB Code</label>
+            <input type="number" id="BSBCode" [class.alert]="displayControl(bsbCodeError)"
+            name="transfer_BSBCode"[(ngModel)]="bsbCode" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #bsbCodeError="ngModel" pattern="^[0-9]{6}$" required/>
+
+            <div class="msg_alert">
+              <div *ngIf="displayControl(bsbCodeError)">
+                <p class="alert">
+                  {{bsbCodeError.errors.required ? "BSB Code requerido": "" }}
+                  {{bsbCodeError.errors.pattern ? "El BSB Code debe contener 6 caracteres numéricos": "" }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+          
+          
+          <!-- Parameters CAD -->
+          <div *ngIf="recipientCurrency=='CAD'">
+        
+            <label for="numInsti">*N° Institucion</label>
+            <input type="number" id="numInsti" [class.alert]="displayControl(numInstiError)"
+            name="transfer_numInsti" [(ngModel)]="numInsti" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #numInstiError="ngModel" pattern="^[0-9]{3}$" required/>
+          
+            <div class="msg_alert">
+              <div *ngIf="displayControl(numInstiError)">
+                <p class="alert">
+                  {{numInstiError.errors.required ? "Numero de institucion requerido": "" }}
+                  {{numInstiError.errors.pattern ? "El No Institución debe tener 3 caracteres numéricos": "" }}
+                </p>
+              </div>
+            </div>
+
+            
+            <label for="numTransito">*N° Transito</label> 
+            <input type="number" id="numTransito" [class.alert]="displayControl(numTransitoError)"
+            name="transfer_numTransito" [(ngModel)]="numTransito"
+            autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #numTransitoError="ngModel" pattern="^[0-9]{5}$" required/>
+            
+            <div class="msg_alert">
+              <div *ngIf="displayControl(numTransitoError)">
+                <p class="alert">
+                  {{numTransitoError.errors.required ? "Numero de transito requerido": "" }}
+                  {{numTransitoError.errors.pattern ? "El No transito debe tener 5 caracteres numéricos": "" }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+          
+          <!-- Parameters EUR -->
+          <div *ngIf="recipientCurrency=='EUR'">
+
+            <label for="iban">*IBAN</label>
+            <input type="text" id="iban" [class.alert]="displayControl(ibanError)"
+            name="transfer_iban"[(ngModel)]="iban" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #ibanError="ngModel" pattern="^[a-zA-Z]{2}[a-zA-Z0-9]{12,30}$" required/>
+
+            <div class="msg_alert">
+              <div *ngIf="displayControl(ibanError)">
+                <p class="alert">
+                  {{ibanError.errors.required ? "IBAN requerido": "" }}
+                </p>
+                <div *ngIf="ibanError.errors.pattern">
+                <p class="alert">
+                  {{iban.match('^[a-zA-Z]{2}[a-zA-Z0-9]{0,}$') ? "" : "El código IBAN debe iniciar con dos letras y sin espacios" }}
+                  {{iban.match('^[a-zA-Z]{2}[a-zA-Z0-9]{0,12}$') ? "El código IBAN es demasido corto" : "" }}
+                  {{iban.match('^[a-zA-Z]{2}[a-zA-Z0-9]{30,}$') ? "El código IBAN es demasido largo" : "" }}
+                </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Parameters GBP -->
+          <div *ngIf="recipientCurrency=='GBP'">
+
+            <label for="ukSortCode">*UK Sort Code</label>
+            <input type="number" id="ukSortCode" [class.alert]="displayControl(ukSortCodeError)"
+            name="transfer_ukSortCode"[(ngModel)]="ukSortCode" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #ukSortCodeError="ngModel" pattern="^[0-9]{6}$" required/>
+
+            <div class="msg_alert">
+              <div *ngIf="displayControl(ukSortCodeError)">
+                <p class="alert">
+                  {{ukSortCodeError.errors.required ? "UK Sort Code requerido": "" }}
+                  {{ukSortCodeError.errors.pattern ? "El UK Sort Code debe tener 6 caracteres numéricos": "" }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+          
+          <!-- Parameters MXN -->
+          <div *ngIf="recipientCurrency=='MXN'">
+
+            <label for="clabe">*CLABE</label>
+            <input type="number" id="clabe" [class.alert]="displayControl(clabeError)"
+            name="transfer_clabe"[(ngModel)]="clabe" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #clabeError="ngModel" pattern="^[0-9]{18}$" required/>
+
+            <div class="msg_alert">
+              <div *ngIf="displayControl(clabeError)">
+                <p class="alert">
+                  {{clabeError.errors.required ? "CLABE requerido": "" }}
+                  {{clabeError.errors.pattern ? "El CLABE Code debe tener 18 caracteres numéricos": "" }}
+                </p>
+              </div>
+            </div>
+
+            
+            <label for="curp">CURP/RFC (opcional)</label> 
+            <input type="text" id="curp" [class.alert]="displayControl(curpError)"
+            name="transfer_curp"[(ngModel)]="curp" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #curpError="ngModel" pattern="^[a-zA-Z]{4}[\d]{6}[a-zA-Z]{6}[\d]{2}$"/>
+
+            <div class="msg_alert">
+              <div *ngIf="displayControl(curpError)">
+                <p class="alert">
+                  {{(curpError.errors.pattern && !curp.match('^[a-zA-Z0-9]{18}$')) ? "El CURP/RFC Code debe tener 18 caracteres, sin espacios" : "" }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+          
+          <!-- Parameters USD -->
+          <div *ngIf="recipientCurrency=='USD'">
+            <label for="achRoutingNum">*ACH Routing Number</label>
+            <input type="number" id="achRoutingNum" [class.alert]="displayControl(achRoutingNumError)"
+            name="transfer_achRoutingNum"[(ngModel)]="achRoutingNum" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #achRoutingNumError="ngModel" pattern="^[0-9]{9}$" required/>
+          
+            <div class="msg_alert">
+              <div *ngIf="displayControl(achRoutingNumError)">
+                <p class="alert">
+                  {{achRoutingNumError.errors.required ? "ACH Routing Number requerido": "" }}
+                  {{achRoutingNumError.errors.pattern ? "El ACH Routing Number debe tener 9 caracteres numéricos": "" }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+            <!-- Parameters USD and AUD  -->
+            <div *ngIf="recipientCurrency=='USD' || recipientCurrency=='AUD'">
+
+              <!-- Parameters country -->
+              <label for="country">*País</label>
+              <input type="text" id="country" [class.alert]="displayControl(countryError)"
+              name="transfer_country" [(ngModel)]="country" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+              #countryError="ngModel" pattern="^[a-zA-Z \u00f1\u00d1 0-9._%#+-]{1,30}$" required/>
+
+              <!-- Validators country-->
+              <div class="msg_alert">
+                <div *ngIf="displayControl(countryError)">
+                  <p class="alert">
+                    {{countryError.errors.required ? "Ciudad requerida": "" }}
+                  </p>
+                </div>
+              </div>
+
+                <!-- Parameters city -->
+              <label for="city">*Ciudad</label>
+              <input type="text" id="city" name="transfer_city" [class.alert]="displayControl(cityError)"
+              [(ngModel)]="city" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+              #cityError="ngModel" pattern="^[a-zA-Z \u00f1\u00d1 0-9._%#+-]{1,30}$" required/>
+
+              <!-- Validators city-->
+              <div class="msg_alert">
+                <div *ngIf="displayControl(cityError)">
+                  <p class="alert">
+                    {{cityError.errors.required ? "Ciudad requerida": "" }}
+                  </p>
+                </div>
+              </div>
+              
+
+              <!-- Parameters address -->
+              <label for="address">*Dirección</label>
+              <input type="text" id="address" [class.alert]="displayControl(addressError)"
+              name="transfer_address" [(ngModel)]="address" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+              #addressError="ngModel" pattern="^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$" required/>
+
+              <!-- Validators address-->
+              <div class="msg_alert">
+                <div *ngIf="displayControl(addressError)">
+                  <p class="alert">
+                    {{addressError.errors.required ? "Dirección requerida": "" }}
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Parameters address -->
+              <label for="state">*Estado</label>
+              <input type="text" id="state" name="transfer_state" [class.alert]="displayControl(stateError)"
+              [(ngModel)]="state" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+              #stateError="ngModel" pattern="^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$" required/>
+              
+              <!-- Validators direccion-->
+              <div class="msg_alert">
+                <div *ngIf="displayControl(stateError)">
+                  <p class="alert">
+                    {{stateError.errors.required ? "Estado requerido": "" }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Parameters address -->
+              <label for="zip">* Codigo Postal</label>
+              <input type="text" id="zip" name="transfer_zip_code" [class.alert]="displayControl(zipError)"
+              [(ngModel)]="zip" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+              #zipError="ngModel" pattern="^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$" required/>
+              
+              <!-- Validators direccion-->
+              <div class="msg_alert">
+                <div *ngIf="displayControl(zipError)">
+                  <p class="alert">
+                    {{zipError.errors.required ? "Codigo ZIP requerido": "" }}
+                  </p>
+                </div>
+              </div>
+
+          </div>
+
+          <!-- Parameters CRYPTO -->
+          <div *ngIf="recipientCurrency=='CRYPTO'">
+            <label for="networkCrypto">*Red</label>
+            <input type="text" id="networkCrypto" [class.alert]="displayControl(networkCryptoError)"
+            name="transfer_networkCrypto"[(ngModel)]="networkCrypto" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #networkCryptoError="ngModel" pattern="^[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}$" required/>
+          
+            <div class="msg_alert">
+              <div *ngIf="displayControl(networkCryptoError)">
+                <p class="alert">
+                  {{networkCryptoError.errors.required ? "Red requerida": "" }}
+                </p>
+              </div>
+            </div>
+            
+
+            <label for="addressWallet">*Direccion de Wallet</label>
+            <input type="text" id="addressWallet" [class.alert]="displayControl(addressWalletError)"
+            name="transfer_addressWallet"[(ngModel)]="addressWallet" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #addressWalletError="ngModel" pattern="^[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}$" required/>
+          
+            <div class="msg_alert">
+              <div *ngIf="displayControl(addressWalletError)">
+                <p class="alert">
+                  {{addressWalletError.errors.required ? "Direccion de Wallet requerida": "" }}
+                </p>
+              </div>
+            </div>
+            
+
+            <label for="memo">*MEMO</label>
+            <input type="text" id="memo" [class.alert]="displayControl(memoError)"
+            name="transfer_memo" [(ngModel)]="memo" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #memoError="ngModel" pattern="^[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}$" required/>
+          
+            <div class="msg_alert">
+              <div *ngIf="displayControl(memoError)">
+                <p class="alert">
+                  {{memoError.errors.required ? "MEMO requerida": "" }}
+                </p>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- Use COP -->
+          <div *ngIf="recipientCurrency=='COP' || 
+          (recipientCurrency!='AUD' && recipientCurrency!='EUR' && recipientCurrency!='GBP' && recipientCurrency!='MXN'
+          && recipientCurrency!='USD' && recipientCurrency!='CAD' && recipientCurrency!='USDC' && recipientCurrency!='CRYPTO')">
+          
+            <label for="bank__q1">*Tipo de documento</label>
+            <select id="select-menu" [(ngModel)]="selectedDocumentType" ng-model="one" class="bx--text-input" required name="actionSelection" >
+              <option  *ngFor="let actionDocument of actionsDocument"  [value]="actionDocument.id">{{actionDocument.name}}</option>
+            </select>
+
+            <div class="msg_alert">
+                <p class="danger">
+                  {{selectedDocumentType==0 ? "Seleccione un tipo de documento" : ""}}
+                </p>
+            </div>
+            
+            <label for="numDocument">*N° Documento</label>
+            <input type="number" id="numDocument" [class.alert]="displayControl(numDocumentError)"
+            name="transfer_numDocument"[(ngModel)]="numDocument" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #numDocumentError="ngModel" pattern="^[0-9]{0,10}$" required/>
+          
+            <div class="msg_alert">
+              <div *ngIf="displayControl(numDocumentError)">
+                <p class="alert">
+                  {{numDocumentError.errors.required ? "Numero de documento requerido": "" }}
+                  {{numDocumentError.errors.pattern ? "El No. de documento debe tener 10 digitos o menos": "" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Parameters Bank -->
+            <label for="bank__q1">*Banco</label>
+            <select id="bank__q1" name="selectedFinancialEntity" [(ngModel)]="selectedBank">
+              <ng-container *ngFor="let bank of banks; let i=index">
+                <option value={{bank.name}}>{{bank.name}}</option>
+              </ng-container>
+            </select>
+            <div class="msg_alert">
+                <p class="danger">
+                  {{selectedBank=='' ? "Seleccione un banco" : ""}}
+                </p>
+            </div>
+          </div>
+
+          <!-- Use for USD, CAD, COP -->
+          <div *ngIf="recipientCurrency=='USD' || recipientCurrency=='CAD' || recipientCurrency=='COP'">
+
+            <label for="bank__q1">*Tipo de cuenta</label>
+            <select id="select-menu" [(ngModel)]="selectedAccountType" ng-model="one" class="bx--text-input" required name="actionSelection" >
+              <option  *ngFor="let actionAccount of actionsAccount"  [value]="actionAccount.id">{{actionAccount.name}}</option>
+            </select>
+
+            <div class="msg_alert">
+                <p class="danger">
+                  {{selectedAccountType==0 ? "Seleccione un tipo de cuenta" : ""}}
+                </p>
+            </div>
+
+          </div>
+
+          <!-- Use for AUD, USD, CAD, GBP, COP -->
+          <div *ngIf="recipientCurrency=='USD' || recipientCurrency=='AUD' || recipientCurrency=='CAD' || recipientCurrency=='GBP' || recipientCurrency=='COP'">
+            
+            <label for="numAccount">*N° Cuenta</label> 
+            <input type="number" id="numAccount" [class.alert]="displayControl(numAccountError)"
+            name="transfer_numAccount"[(ngModel)]="numAccount" autocomplete="off"  [ngModelOptions]="{ updateOn: 'change' }" 
+            #numAccountError="ngModel" required/>
+
+            <div class="msg_alert">
+              <div *ngIf="displayControl(numAccountError)">
+                <p class="alert">
+                  {{numAccountError.errors.required ? "Numero de cuenta requerido": "" }}
+                </p>
+              </div>
+              <div *ngIf="(numAccountError.dirty || numAccountError.touched)">
+                <p class="alert">
+                  {{(recipientCurrency=='AUD' && numAccount.toString().match('^[0-9]{0,4}$')) ? 
+                      "El número de cuenta es demasiado corto" : ""}}
+                  {{(recipientCurrency=='AUD' && !numAccount.toString().match('^[0-9]{0,9}$')) ? 
+                      "El número de cuenta es demasiado largo" : ""}}
+                  {{(recipientCurrency=='CAD' && numAccount.toString().match('^[0-9]{0,7}$')) ? 
+                      "El número de cuenta es demasiado corto" : ""}}
+                  {{(recipientCurrency=='CAD' && !numAccount.toString().match('^[0-9]{0,12}$')) ? 
+                      "El número de cuenta es demasiado largo" : ""}}
+                  {{(recipientCurrency=='GBP' && !numAccount.toString().match('^[0-9]{8}$')) ?
+                      "El número de cuenta debe tener 8 caraceres numéricos" : ""}} 
+                  {{(recipientCurrency=='USD' && numAccount.toString().match('^[0-9]{0,4}$')) ? 
+                      "El número de cuenta es demasiado corto" : ""}}
+                  {{(recipientCurrency=='USD' && !numAccount.toString().match('^[0-9]{0,17}$')) ? 
+                      "El número de cuenta es demasiado largo" : ""}}
+                  {{(recipientCurrency=='COP' && numAccount.toString().match('^[0-9]{0,4}$')) ? 
+                      "El número de cuenta es demasiado corto" : ""}}
+                  {{(recipientCurrency=='COP' && !numAccount.toString().match('^[0-9]{0,20}$')) ? 
+                      "El número de cuenta es demasiado largo" : ""}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="withdraw__btn">
+        <app-button [label]="'Siguiente'" 
+        [disable]="!
+        (
+        (numAccount.toString().match('^[0-9]{4,20}$') && numDocument.toString().match('^[0-9]{5,10}$') && selectedAccountType!=0 && selectedDocumentType!=0 && selectedBank!='') ||
+        (numAccount.toString().match('^[0-9]{4,9}$') && recipientCurrency=='AUD' && bsbCode.toString().match('^[0-9]{6}$') &&
+        city.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,30}$') && address.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$') && zip.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$')) || 
+        (numInsti.toString().match('^[0-9]{3}$') && recipientCurrency=='CAD' && numTransito.toString().match('^[0-9]{5}$') && numAccount.toString().match('^[0-9]{7,12}$') && selectedAccountType!=0) ||
+        (iban.match('^[a-zA-Z]{2}[a-zA-Z0-9]{12,30}$') && recipientCurrency=='EUR') ||
+        (ukSortCode.toString().match('^[0-9]{6}$') && recipientCurrency=='GBP' && numAccount.toString().match('^[0-9]{8}$')) ||
+        (clabe.toString().match('^[0-9]{18}$') && (curp.match('^[a-zA-Z0-9]{0}$') || curp.match('^[a-zA-Z]{4}[0-9]{6}[a-zA-Z]{6}[0-9]{2}$')) && recipientCurrency=='MXN' ) ||
+        (achRoutingNum.toString().match('^[0-9]{9}$') && recipientCurrency=='USD' && numAccount.toString().match('^[0-9]{4,17}$') && selectedAccountType!=0 && 
+        city.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,30}$') && address.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$') && zip.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$')) ||
+        (phoneWithdraw.toString().match('^[0-9.+]{1,40}$') && recipientCurrency=='USDC') ||
+        (networkCrypto.match('[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}') && recipientCurrency=='CRYPTO' && addressWallet.match('[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}') && memo.match('[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}'))
+        )"
+
+        (click)="
+        (
+        (numAccount.toString().match('^[0-9]{4,20}$') && numDocument.toString().match('^[0-9]{5,10}$') && selectedAccountType!=0 && selectedDocumentType!=0) ||
+        (numAccount.toString().match('^[0-9]{4,9}$') && recipientCurrency=='AUD' && bsbCode.toString().match('^[0-9]{6}$') &&
+        city.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,30}$') && address.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$') && zip.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$')) || 
+        (numInsti.toString().match('^[0-9]{3}$') && recipientCurrency=='CAD' && numTransito.toString().match('^[0-9]{5}$') && numAccount.toString().match('^[0-9]{7,12}$') && selectedAccountType!=0) ||
+        (iban.match('^[a-zA-Z]{2}[a-zA-Z0-9]{12,30}$') && recipientCurrency=='EUR') ||
+        (ukSortCode.toString().match('^[0-9]{6}$') && recipientCurrency=='GBP' && numAccount.toString().match('^[0-9]{8}$')) ||
+        (clabe.toString().match('^[0-9]{18}$') && ( curp.match('^[a-zA-Z0-9]{0}$') || curp.match('^[a-zA-Z]{4}[0-9]{6}[a-zA-Z]{6}[0-9]{2}$')) && recipientCurrency=='MXN' ) ||
+        (achRoutingNum.toString().match('^[0-9]{9}$') && recipientCurrency=='USD' && numAccount.toString().match('^[0-9]{4,17}$') && selectedAccountType!=0 && 
+        city.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,30}$') && address.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$') && zip.match('^[a-zA-Z \u00f1\u00d1 0-9._#$°%+-]{1,50}$')) ||
+        (phoneWithdraw.toString().match('^[0-9.+]{1,40}$') && recipientCurrency=='USDC') ||
+        (networkCrypto.match('[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}') && recipientCurrency=='CRYPTO' && addressWallet.match('[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}') && memo.match('[a-zA-Z\u00f1\u00d1 0-9._%+-]{1,40}'))
+        )
+        &&
+        changeSlide('next')"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide *ngIf="true">
+      <div class="swiper-slide__container">
+        <app-title [title]="'Revisa los detalles de tu retiro'" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <div class="withdraw__comparative">
+          <app-subtitle [text]="'Informacion de la transacción'"></app-subtitle>
+          <app-compare [title]="'USDC a retirar: '" [text]="formatNumber(amountTransaccion)" [subText]="' '+sendingCurrency"></app-compare>
+          <app-compare [title]="'Comisión: '" [text]="formatNumber(comisionValue)" [subText]="' '+sendingCurrency"></app-compare>
+          <app-compare [title]="'Total a convertir: '" [text]="formatNumber(amountTransaccion)" [subText]="' '+sendingCurrency"></app-compare>
+          <app-compare [title]="'Tasa de cambio: '" [text]="formatNumber(selectedExchangeRate.buy_rate)" [subText]="' '+sendingCurrency + '/' + recipientCurrency"></app-compare>
+          <app-compare [title]="'Recibes: '" [text]="formatNumber(amountTransaccion)" [subText]="' '+recipientCurrency"></app-compare>
+        </div>
+        <div class="withdraw__comparative">
+          <app-compare [title]="'Nombre completo del titular: '" [text]="recipientName"></app-compare>
+          <div *ngIf="recipientCurrency=='COP' || ''">
+            <app-compare [title]="'Tipo de documento: '" [text]="actionsDocument[selectedDocumentType].name"></app-compare>
+            <app-compare [title]="'Número de documento: '" [text]="numDocument"></app-compare>
+            <app-compare [title]="'Banco: '" [text]="selectedBank"></app-compare>
+            <app-compare [title]="'Tipo de cuenta: '" [text]="actionsAccount[selectedAccountType].name"></app-compare>
+            <app-compare [title]="'Número de cuenta: '" [text]="numAccount"></app-compare>
+          </div>
+          <div *ngIf="recipientCurrency=='USD'">
+            <app-compare [title]="'ACH Routing number: '" [text]="actionsDocument[selectedDocumentType].name"></app-compare>
+            <app-compare [title]="'Número de cuenta: '" [text]="numAccount"></app-compare>
+            <app-compare [title]="'Tipo de cuenta: '" [text]="actionsAccount[selectedAccountType].name"></app-compare>
+            <app-compare [title]="'País: '" [text]="country"></app-compare>
+            <app-compare [title]="'Ciudad: '" [text]="city"></app-compare>
+            <app-compare [title]="'Dirección: '" [text]="address"></app-compare>
+            <app-compare [title]="'Estado: '" [text]="state"></app-compare>
+            <app-compare [title]="'Código postal: '" [text]="zip"></app-compare>
+          </div>
+          <div *ngIf="recipientCurrency=='EUR'">
+            <app-compare [title]="'IBAN: '" [text]="iban"></app-compare>
+          </div>
+          <div *ngIf="recipientCurrency=='CAD'">
+            <app-compare [title]="'Número de institución: '" [text]="numInsti"></app-compare>
+            <app-compare [title]="'Número de tránsito: '" [text]="numTransito"></app-compare>
+            <app-compare [title]="'Tipo de cuenta: '" [text]="actionsAccount[selectedAccountType].name"></app-compare>
+            <app-compare [title]="'Número de cuenta: '" [text]="numAccount"></app-compare>
+          </div>
+          <div *ngIf="recipientCurrency=='AUD'">
+            <app-compare [title]="'BSB code: '" [text]="bsbCode"></app-compare>
+            <app-compare [title]="'Número de cuenta: '" [text]="numAccount"></app-compare>
+            <app-compare [title]="'País: '" [text]="country"></app-compare>
+            <app-compare [title]="'Ciudad: '" [text]="city"></app-compare>
+            <app-compare [title]="'Dirección: '" [text]="address"></app-compare>
+            <app-compare [title]="'Estado: '" [text]="state"></app-compare>
+            <app-compare [title]="'Código postal: '" [text]="zip"></app-compare>
+          </div>
+          <div *ngIf="recipientCurrency=='GBP'">
+            <app-compare [title]="'UK Sort code: '" [text]="ukSortCode"></app-compare>
+            <app-compare [title]="'Número de cuenta: '" [text]="numAccount"></app-compare>
+          </div>
+          <div *ngIf="recipientCurrency=='MXN'">
+            <app-compare [title]="'CLABE: '" [text]="clabe"></app-compare>
+            <app-compare [title]="'CURP: '" [text]="curp"></app-compare>
+          </div>
+        </div>
+      </div>
+      <div class="charge__btn">
+        <app-button [label]="'Confirmar Y Retirar'" (click)="changeSlide('next')"></app-button>
+      </div>
+      <div class="withdraw__btn">
+        <app-button [label]="'Cancelar'" (click)="navCtrl.navigateForward('/dashboard/viio')"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Introduce tu contraseña'" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <form>
+          <p class="info-text">
+            Indica tu contraseña para aprobar esta transferencia. 
+            Esta es una revisión de seguridad para mantener tu cuenta segura.
+          </p>
+          <!-- Password confirmation -->
+          <label for="validation_password">*Contraseña</label>
+          <div class="form__password">
+            <input [type]=" showPassword ? 'text' : 'password'" [class.alert]="displayControl(validationPasswordError)"
+            class="form-control" id="transfer_password" name="transfer_validation_password" [(ngModel)]="validation_password" 
+            [ngModelOptions]="{ updateOn: 'change' }" #validationPasswordError="ngModel" 
+            required/>
+
+            <div class="icon">
+              <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword = !showPassword"
+              [class.hide]="showPassword">
+              <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword = !showPassword"
+              [class.hide]="!showPassword">
+            </div>
+          </div>
+        <!-- Validators country-->
+          <div class="msg_alert">
+            <div *ngIf="displayControl(validationPasswordError)">
+              <p class="alert">
+                {{validationPasswordError.errors.required ? "Contraseña requerida": "" }}
+              </p>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="withdraw__btn">
+        <app-button [label]="'Siguiente'" [disable]="!(validationPasswordError.valid)" 
+        (click)="validationPasswordError.valid && confirmationPassword()"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide *ngIf="transactionresult == 0">
+      <div class="swiper-slide__container">
+        <app-title [title]="'Retiro en proceso'" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]="[false,false]"></app-title>
+        <app-transaction-result
+        [title]="'Transacción en proceso'"
+        [icon]="'&#x63;'"
+        [subtitle]="'Transacción Procesada'"
+        [type]="'process'"
+        >
+        </app-transaction-result>
+        <p class="msg_alert">
+          Los retiros pueden tardar hasta 48 horas. Recuerda que los tiempos también dependen de la entidad receptora.</p>
+      </div>
+      <div class="withdraw__btn">
+        <app-button [label]="'Entendido'" (click)="completeWithdraw()"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide *ngIf="transactionresult == 1">
+      <div class="swiper-slide__container">
+        <app-title [title]="'Transferencía'" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]="[false,false]"></app-title>
+        <app-transaction-result
+          [title]="'Transacción Rechazada'"
+          [icon]="'&#xe90f;'"
+          [subtitle]="'Transacción Denegada'"
+          [type]="'denied'"
+        >
+        </app-transaction-result>
+      </div>
+      <div class="withdraw__btn">
+        <app-button [label]="'Entendido'" (click)="completeWithdraw()"></app-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

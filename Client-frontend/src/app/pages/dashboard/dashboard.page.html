@@ -1,0 +1,95 @@
+<ion-content>
+  <ion-router-outlet>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" class="menu">
+        <ion-tab-button tab="viio">
+          <div class="dashboard__icon">
+            A
+          </div>
+          <ion-label>VIIO</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="activity">
+          <div class="dashboard__icon">
+            B
+          </div>
+          <ion-label>Actividad</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="web3">
+          <div class="dashboard__viio-btn">
+            <img src="assets/images/LOGO SYMB.svg" alt="Menu" width="33">
+          </div>
+        </ion-tab-button>
+        <ion-tab-button tab="card">
+          <div class="dashboard__icon">
+            C
+          </div>
+          <ion-label>Tarjeta</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="configuration">
+          <div class="dashboard__icon">
+            D
+          </div>
+          <ion-label>Config.</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-router-outlet>
+
+</ion-content>
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <ion-label>Mi cuenta: </ion-label>
+      <ion-label>{{ username }}</ion-label>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="log-out" (click)="logout()" class="toolbar-icon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="static-background">
+    <ion-list style="height: 100%; background-color: transparent;">
+      <ion-item class="semi-transparent">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <span class="span-title">
+                Mis dólares digitales
+              </span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>{{ balance }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item style="height: 70%;" class="semi-transparent">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <span class="span-title">
+                Mis transferencias
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item class="fully-transparent">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <button class="btn" (click)="buy()" ion-button full><b>COMPRAR USD</b></button>
+            </ion-col>
+            <ion-col>
+              <button class="btn" (click)="transfer()" ion-button full><b>RETIRAR Y TRANSFERIR</b></button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+</ion-content> -->

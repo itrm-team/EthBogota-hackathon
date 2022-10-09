@@ -1,0 +1,11 @@
+<div class="title" [class]="style">
+  <h1 class="title__content">
+    {{title}}
+  </h1>
+  <div class="title__btn left" (click)="backClicked()" *ngIf="arrows[0]">
+    <
+  </div>
+  <div class="title__btn right" (click)="nextClicked()" *ngIf="arrows[1]">
+    >
+  </div>
+</div>

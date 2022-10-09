@@ -1,0 +1,111 @@
+<div class="login" [class]="mode">
+  <div class="login__home" *ngIf="showLogin">
+    <div class="login__logo">
+      <div class="login__logo-symbol">
+        <img src="assets/images/LOGO SYMB.svg" alt="VIIO Logo" width="120" />
+      </div>
+      <div class="login__logo-text">
+        <img src="assets/images/LOGO TYPE.svg" alt="VIIO Logo" width="120" />
+      </div>
+    </div>
+    <div class="login__form login__elem">
+      <div class="login__form-wrapper">
+        <form #loginForm="ngForm" novalidate>
+          <input
+            class="input"
+            name="email"
+            type="email"
+            [(ngModel)]="account.email"
+            required
+            #emailAddress="ngModel"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            placeholder="Usuario"
+            [ngModelOptions]="{ updateOn: 'change' }"
+            #emailerror="ngModel"
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          />
+          <div class="msg_alert">
+            <div
+              *ngIf="
+                emailerror.invalid && (emailerror.dirty || emailerror.touched)
+              "
+            >
+              <p class="danger">
+                {{ emailerror.errors.required ? "Escribe email " : "" }}
+              </p>
+              <p class="alert">
+                {{ emailerror.errors.pattern ? "Email inválido" : "" }}
+              </p>
+            </div>
+          </div>
+          <div class="form__password">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="input"
+              name="password"
+              [(ngModel)]="account.password"
+              #password="ngModel"
+              autocomplete="off"
+              placeholder="Contraseña"
+              [ngModelOptions]="{ updateOn: 'change' }"
+              #passworderror="ngModel"
+              required
+            />
+            <div class="icon">
+              <img src="assets/icon/password/show-password-light.svg" alt="" (click)="showPassword = !showPassword"
+              [class.hide]="showPassword">
+              <img src="assets/icon/password/hide-password-light.svg" alt="" (click)="showPassword = !showPassword"
+              [class.hide]="!showPassword">
+            </div>
+          </div>
+          <div class="msg_alert">
+            <div
+            *ngIf="
+            passworderror.invalid &&
+            (passworderror.dirty || passworderror.touched)
+          "
+            >
+            <p class="danger">
+              {{ passworderror.errors.required ? "Digita una contraseña" : "" }}
+            </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="login__options">
+      <div class="login__elem">
+        <app-button
+          [label]="'Ingresar'"
+          [light]="true"
+          (click)="emailerror.valid && passworderror.valid && doLogin()"
+          [disable]="!(emailerror.valid && passworderror.valid)"
+        ></app-button>
+      </div>
+      <p class="login__option login__elem" [routerLink]="['/sign-up']">
+        Regístrarse
+      </p>
+      <p class="login__option login__elem" [routerLink]="['/recover']">
+        Recuperar contraseña
+      </p>
+    </div>
+  </div>
+  <app-balance *ngIf="showBalance" [data]="9999.999999999"></app-balance>
+  <app-menu
+    *ngIf="showMenu"
+    (logOutEvent)="changeMode('login', '')"
+    (closeEvent)="changeMode('', '')"
+  ></app-menu>
+  <div
+    class="login__header"
+    [class.active]="mode !== 'login' && mode !== 'hide'"
+  >
+    <img src="assets/images/LOGO TEXT.svg" alt="VIIO Logo" width="90" />
+  </div>
+</div>
+<div class="mask" *ngIf="mode == 'viio'"></div>
+<app-button-charge-withdraw
+  [hidden]="!showBalance"
+></app-button-charge-withdraw>

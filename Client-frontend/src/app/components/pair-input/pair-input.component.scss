@@ -1,0 +1,53 @@
+img {
+  width: 27px;
+  height: 27px;
+  align-items: center;
+}
+
+.pair-input {
+
+  &__flag {
+    background-color: var(--color-accent);
+    border: 0.5px solid var(--color-border);
+    border-radius: 7px;
+    p {
+      font-size: var(--fontSize-litle);
+      color: var(--color-light);
+      margin: 0;
+      padding: 10px;
+      text-align: center;
+    }
+  }
+
+  &__data {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    bottom: 6rem;
+    &-line {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      width: 1px;
+      height: 100%;
+    }
+    &-total{
+      margin-top: 1rem;
+
+      p{
+        margin-top: 10px;
+        text-align: center;
+        font-weight: var(--fontWeight-little);
+        font-size: var(--fontSize-little);
+
+      }
+    }
+    &-item {
+      width: 300px;
+      position: relative;
+      
+    }
+  }
+}

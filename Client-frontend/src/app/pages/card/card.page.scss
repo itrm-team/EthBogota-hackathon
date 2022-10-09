@@ -1,0 +1,24 @@
+.card {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content:baseline;
+  align-items: center;
+
+  .img {
+    height: 70%;
+    padding: 17px 0 35px 0;
+  }
+  p.title {
+    font-family: var(--font-work);
+    font-weight: 400;
+    font-size: 1rem;
+    padding-bottom: 15px;
+  }
+  p {
+    font-family: var(--font-work);
+    text-align: center;
+    font-weight: 300;
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,12 @@
+<div class="info-modal">
+  <!-- <div class="info-modal__icon">{{icon}}</div> -->
+  <img type="img" class="info-modal__icon" src="{{icon}}">
+  <div class="info-modal__content">
+    <app-subtitle [text]="title"></app-subtitle>
+     <p class="p justify" [innerHTML]="content"></p> 
+  </div>
+  <div class="info-modal__btn">
+    <app-button [light] *ngIf="btnCallback && btnLabelA" style="margin-right: 1px; width: 148px;" [label]="btnLabelA" (click)="callbtnCallback()"></app-button>
+    <app-button [label]="btnLabel" *ngIf="btnLabel" (click)="dismiss()"></app-button>
+  </div>
+</div>

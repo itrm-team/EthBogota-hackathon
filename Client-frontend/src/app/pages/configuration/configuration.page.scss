@@ -1,0 +1,40 @@
+.config {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(100% - 1px);
+  &>div {
+    width: 100%;
+  }
+  &__data {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    &-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 100%;
+      overflow: hidden;
+    }
+    &-title {
+      padding-bottom: 10px;
+      font-family: var(--font-work);
+      color: var(--color-dark);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+    &-name {
+      font-size: 0.8rem;
+      font-weight: 300;
+      margin: 5px;
+      letter-spacing: 1.5px;
+      color: var(--color-border-dark);
+    }
+  }
+  a{
+    color: var(--color-dark);
+    text-decoration: none;
+  }
+}

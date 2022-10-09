@@ -1,0 +1,43 @@
+<ion-content>
+  <div *ngIf="referenceIsValid == 0">
+    <app-transaction-result
+    [title]="'Verificando el estado de su transacción, por favor espere'"
+    [icon]="'&#x63;'"
+    [subtitle]="'Transacción en espera'"
+    [type]="'process'"
+    >
+    </app-transaction-result>
+  </div>
+  <div *ngIf="referenceIsValid == 1">
+    <app-transaction-result
+    [src]="'assets/images/SUCCESS.svg'"
+    [subtitle]="'Transacción exitosa √'"
+    [type]="'success'"
+    >
+    </app-transaction-result>
+    <p>Depositaste exitosamente</p>
+    <app-compare [title]="'Nombre:'" [text]=this.response.name></app-compare>
+    <app-compare [title]="'Telefono:'" [text]=this.response.phone></app-compare>
+    <app-compare [title]="'Id Transferencia Wompi:'" [text]=this.response.id></app-compare>
+    <app-compare [title]="'Cantidad:'" [text]= this.response.amount_in_cents></app-compare>
+    <app-compare [title]="'Correo:'" [text]=this.response.email></app-compare>
+    <app-compare [title]="'Método de pago:'" [text]=this.response.payment_method></app-compare>
+  </div>
+
+  <div *ngIf="referenceIsValid == 2">
+    <app-transaction-result
+    [icon]="'&#xe90f;'"
+    [subtitle]="'Transacción Denegada'"
+    [type]="'denied'"
+    >
+    </app-transaction-result>
+    <app-compare [title]="'Error :'" [text]=this.response.status_message></app-compare>
+  </div>
+  <router-outlet></router-outlet>
+  <div class="charge__btn" *ngIf="referenceIsValid != 0">
+    <app-button
+      [label]="'Entendido'"
+      [routerLink]="['/dashboard/viio']"
+    ></app-button>
+  </div>
+</ion-content>

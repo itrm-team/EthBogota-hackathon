@@ -1,0 +1,62 @@
+<ion-content>
+  <swiper #tutorialSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Ahorra en dólares digitales'" [arrows]="[false, true]" (nextEvent)="changeSlide('next')"></app-title>
+        <div class="tutorial__img-wrapper">
+          <img src="assets/images/tutorial/01.svg" alt="Tutorial 1" width="200">
+        </div>
+        <p class="p tutorial center">
+          Cúbrete de la devaluación en minutos y sin costos ocultos comprando USDC con tus medios de pago conocidos.
+        </p>
+      </div>
+      <div class="tutorial__btn">
+        <app-button [label]="'Continuar'" [light]="false" (click)="changeSlide('next')"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Tu dinero en todo el mundo'" [arrows]="[true, true]" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')"></app-title>
+        <div class="tutorial__img-wrapper">
+          <img src="assets/images/tutorial/02.svg" alt="Tutorial 2" width="200">
+        </div>
+        <p class="p tutorial center">
+          Haz envíos internacionales desde colombia hacia 25 países destino. Solo debes tener una cuenta bancaria a tu nombre en el país que elijas.<br> 
+          También deposita o retira tus dólares digitales hacia o desde cualquier billetera de activos digitales. 
+        </p>
+      </div>
+      <div class="tutorial__btn">
+        <app-button [label]="'Continuar'" [light]="false" (click)="changeSlide('next')"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Seguridad de grado militar'" [arrows]="[true, true]" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')"></app-title>
+        <div class="tutorial__img-wrapper">
+          <img src="assets/images/tutorial/03.svg" alt="Tutorial 3" width="200">
+        </div>
+        <p class="p tutorial center">
+          Sin importar el saldo en VIIO tus activos digitales cuentan con esquemas de custodio cualificado con seguro de hackeo, 
+          firewall de acceso y servicios asegurados con SSL, entre otros.
+        </p>
+      </div>
+      <div class="tutorial__btn">
+        <app-button [label]="'Continuar'" [light]="false" (click)="changeSlide('next')"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Rentabilidad con el poder de DeFi'" [arrows]="[true, false]" (backEvent)="changeSlide('back')"></app-title>
+        <div class="tutorial__img-wrapper">
+          <img src="assets/images/tutorial/04.svg" alt="Tutorial 4" width="200">
+        </div>
+        <p class="p tutorial center">
+          Impulsa tu saldo con recompensas de hasta 10% e.a accediendo a DeFi sin complicaciones ni comisiones ni costos ocultos.
+        </p>
+      </div>
+      <div class="tutorial__btn">
+        <app-button [label]="'Entendido'" [light]="false" (click)="changeSlide('home')"></app-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

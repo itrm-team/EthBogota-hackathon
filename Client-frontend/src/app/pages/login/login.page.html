@@ -1,0 +1,157 @@
+<ion-content>
+  <div class="login__bg"></div>
+  <div class="login__logo">
+    <img src="./../../../pokkash/assets/img/login/ITRM-logo.svg" alt="" style="width: 160px !important;">
+  </div>
+
+  <!-- <div class="login__logo2">
+    <img src="./../../../assets/img/login/immpulsa.png" alt="">
+  </div> -->
+  <div class="login__container">
+    <div class="login__title" [hidden]="viewState != 'login'">
+      <h2>INICIAR SESION</h2>
+    </div>
+
+    <div class="login__title" [hidden]="viewState != 'signup'">
+      <h2>REGISTRARSE</h2>
+    </div>
+
+    <div class="login__title" [hidden]="viewState != 'recover'">
+      <h2>RECUPERAR CONTRASEÑA</h2>
+    </div>
+
+   <div class="login__form">
+      <form #loginForm="ngForm" novalidate [hidden]="viewState != 'login'">
+        <input class="input" name="username" type="email" [(ngModel)]="account.username" required
+          #emailAddress="ngModel" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Usuario">
+        <input class="input" name="password" type="password" [(ngModel)]="account.password" required #password="ngModel"
+          autocomplete="off" placeholder="Contraseña">
+          <label style="margin-left: 180px; margin-top: 50px;"><b style="color: #01567b; font-size: 12px;" (click)="viewState = 'recover'" >Recuperar mi contraseña</b></label>
+          <br>
+      </form>
+
+      <form #loginForm="ngForm" novalidate [hidden]="viewState != 'recover'">
+        <input class="input" name="username" type="email" [(ngModel)]="account.username" required
+          #emailAddress="ngModel" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Usuario">
+      </form>
+      
+      <!-- <form  [formGroup]="registerForm" novalidate [hidden]="viewState != 'signup'" class="center">
+        <input class="input" name="name" type="text" [(ngModel)]="signup.name" required
+          spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Nombre Completo" formControlName="name">
+          <input class="input" name="username" type="email" [(ngModel)]="account.username" required
+          autocomplete="off" placeholder="Correo Electrónico" formControlName="username">
+          <input class="input" name="password" type="password" [(ngModel)]="account.password" required
+          autocomplete="off" placeholder="Contraseña" formControlName="password">
+          <input class="input" name="passwordConf" type="password" [(ngModel)]="signup.passwordConf" required
+          autocomplete="off" placeholder="Confirmar Contraseña" formControlName="passwordConf">
+          <ion-text color="danger" class="center">
+              <div class="error-message" *ngIf="registerForm.get('name').hasError('required') && (registerForm.get('name').dirty || registerForm.get('name').touched)">
+                Se requiere un nombre valido
+              </div>
+              <div class="error-message" *ngIf="(registerForm.get('emailAddress').hasError('required') || registerForm.get('emailAddress').hasError('pattern')) && (registerForm.get('emailAddress').dirty || registerForm.get('emailAddress').touched)">
+                Se requiere un correo valido
+              </div>
+              <div class="error-message" *ngIf="registerForm.get('password').hasError('required') && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+                Se requiere una contraseña valida
+              </div>
+              <div class="error-message" *ngIf="registerForm.get('passwordConf').hasError('required') && (registerForm.get('passwordConf').dirty || registerForm.get('passwordConf').touched)">
+                Se requiere confirmar la contraseña
+              </div>
+          </ion-text>
+      </form> -->
+      <!-- <form #recoverForm="ngForm" novalidate [hidden]="viewState != 'recover'">
+        <input class="input" name="emailAddress" type="email" [(ngModel)]="recover.name" required
+          #emailAddress="ngModel" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Correo Electrónico">
+      </form>
+      <div class="login__forget" (click)="onRecover()" [hidden]="viewState != 'login'">
+        <p>Olvidé mi contraseña</p>
+      </div> -->
+      <!-- <div class="login__terms" [hidden]="viewState != 'signup'">
+        <form #termsForm="ngForm" novalidate class="center">
+          <input class="" id="singup-terms" name="terms" type="checkbox" [(ngModel)]="recover.password" required
+            #terms="ngModel">
+            <label for="singup-terms">He Leído y acepto los <a href="" target="_blank" rel="noopener noreferrer">terminos y condiciones</a></label><br>
+        </form>
+      </div> -->
+      <br>
+      <div class="login__terms" [hidden]="viewState != 'signup'">
+        <form #termsForm="ngForm" novalidate class="center">
+          <input class="" id="singup-terms" name="terms" type="checkbox" [(ngModel)]="terms" required>
+          <label style="margin-left: 25px" for="singup-terms">He Leído y acepto los <b (click)="showTerms()">terminos y condiciones</b></label><br>
+        </form>
+      </div>
+    </div>
+    <div class="login__button">
+      <div class="btn" (click)="doLogin()" [hidden]="viewState != 'login'">
+        <span>INGRESAR</span>
+      </div>
+
+      <div class="btn" (click)="changeViewState('signup')" [hidden]="viewState != 'login'">
+        <span>REGISTRARME</span>
+      </div>
+      
+      <div class="btn" (click)="changeViewState('login')" [hidden]="viewState != 'signup'">
+        <span>VOLVER</span>
+      </div>
+      <!-- <div class="btn" [hidden]="viewState != 'recover'">
+        <span>ENVIAR</span>
+      </div> -->
+      <button class="btn" (click)="signup()" [hidden]="viewState != 'signup'" [disabled]="!terms">
+        <span>REGISTRARSE</span>
+      </button>
+      <!-- <div class="btn" (click)="signup()" [hidden]="viewState != 'signup'" [disabled]="!terms">
+        <span>REGISTRARSE</span>
+      </div> -->
+
+      <!-- <button class="btn" (click)="recover()" [hidden]="viewState != 'recover'">
+        <span>RECUPERAR CONTRASEÑA</span>
+      </button> -->
+    </div>
+
+    <div class="login__terms" [hidden]="viewState != 'login'">
+      <br><label style="margin-left: 180px; margin-top: 50px;"><b style="color: #01567b; font-size: 12px;" (click)="showTerms()">Terminos y Condiciones</b></label>
+    </div>
+  </div>
+</ion-content>
+
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card style="width:60%; margin-left:20%;">
+    <ion-card-content>
+        <form>
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">CORREO</ion-label>
+                <ion-input type="text" [(ngModel)]="account.username" name="username" ></ion-input>
+              </ion-item>
+        
+              <ion-item style="padding-top: 20px;">
+                <ion-label position="floating">CONTRASEÑA</ion-label>
+                <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+              </ion-item>
+
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <button class="btn" (click)="doLogin()" ion-button full>INGRESAR</button>
+                  </ion-col>
+                  <ion-col>
+                    <button class="btn" (click)="signup()" ion-button full>REGISTRARSE</button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+        
+            </ion-list>
+          </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+ -->

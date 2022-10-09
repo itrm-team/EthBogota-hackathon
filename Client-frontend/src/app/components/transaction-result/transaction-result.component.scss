@@ -1,0 +1,44 @@
+.transaction {
+    padding-top: 129px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    &__content {
+        padding-top: 20px;
+        font-family: var(--font-work);
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+    }
+    &__subtitle {
+        padding: 10px 0;
+        text-align: center;
+        font-family: var(--font-work);
+        font-size: 24px;
+        font-weight: 300;
+        color: var(--color-accent);
+        &.warn{
+            color: var(--color-warn);
+        }
+        &.denied{
+            color: var(--color-alert); 
+        }
+    }
+    &__icon {
+        font-family: var(--font-iconSet1), var(--font-iconSet4);
+        font-size: 5rem;
+        padding: 10px 0px 10px 0px;
+        align-self: center;
+        color: var(--color-alert);   
+        &.warn{
+            color: var(--color-warn);
+        }
+    }
+    img{
+    width: 120px;
+    height: 120px;
+    padding: 10px 0px 10px 0px;
+    align-self: center;
+
+  }
+}

@@ -1,0 +1,10 @@
+<ion-content>
+  <swiper #chargeSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Comprar ETH'" (backEvent)="changeSlide('home')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <app-web3-pair-input [info]=0 (withdrawPayload)="processInitialPayload($event)"></app-web3-pair-input>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

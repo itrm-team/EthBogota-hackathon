@@ -1,0 +1,17 @@
+<div class="list">
+  <div class="list__date" *ngIf="active">
+    {{date}}
+  </div>
+  <div class="list__items"  *ngFor="let item of list; let i = index">
+    <app-button-link #active 
+    [mode]="'list'" 
+    [label]="item.user" 
+    [icon]="getIcon(item.type)" 
+    [subLabel]="item.type"
+    [status]="item.status"
+    [info]="item.info" 
+    [outline]="i === 0?'both':'bottom'" 
+    (click)="presentModal(date, item.type, item.info, item.status)">
+    </app-button-link>
+  </div>
+</div>

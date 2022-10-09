@@ -1,0 +1,50 @@
+<ion-content>
+  <div *ngFor="let exRate of exchangerate">
+    <div *ngIf="exRate.baseCurrency.ticker === 'USDC'">
+      <div *ngIf="exRate.quoteCurrency.ticker === 'USD'">
+        <app-button-link 
+          [mode]="'info'" 
+          [src]="'assets/icon/countries/'+exRate.quoteCurrency.ticker+'.svg'" 
+          [label]="exRate.baseCurrency.ticker+'/'+ exRate.quoteCurrency.ticker" 
+          [subLabel]="exRate.baseCurrency.ticker +' a '+ camelize(exRate.quoteCurrency.name)" 
+          [info]="twoDecimals(exRate.buy_rate)" 
+          [outline]="'bottom'">
+        </app-button-link>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngFor="let exRate of exchangeRates">
+    <div *ngIf="exRate.baseCurrency.ticker === 'USDC'">
+      <div *ngIf="exRate.quoteCurrency.ticker == 'USD' || exRate.quoteCurrency.ticker == 'COP'">
+        <app-button-link 
+          [mode]="'info'" 
+          [src]="'assets/icon/countries/'+exRate.quoteCurrency.ticker+'.svg'" 
+          [label]="exRate.baseCurrency.ticker+'/'+ exRate.quoteCurrency.ticker" 
+          [subLabel]="exRate.baseCurrency.ticker +' a '+ camelize(exRate.quoteCurrency.name)" 
+          [info]="twoDecimals(exRate.buy_rate)" 
+          [outline]="'bottom'">
+        </app-button-link>
+      </div>
+      <div *ngIf="!(exRate.quoteCurrency.ticker == 'USD' ||  exRate.quoteCurrency.ticker =='COP')">
+        <app-button-link 
+          [mode]="'info'" 
+          [src]="'assets/icon/countries/'+exRate.quoteCurrency.ticker+'.svg'" 
+          [label]="exRate.baseCurrency.ticker+'/'+ exRate.quoteCurrency.ticker" 
+          [subLabel]="exRate.baseCurrency.ticker +' a '+ camelize(exRate.quoteCurrency.name)" 
+          [info]="fourDecimals(exRate.buy_rate)" 
+          [outline]="'bottom'">
+        </app-button-link>
+      </div>
+    </div>
+    <div *ngIf="exRate.baseCurrency.ticker !== 'USDC'">
+      <app-button-link 
+        [mode]="'info'" 
+        [src]="'assets/icon/countries/'+exRate.baseCurrency.ticker+'.svg'" 
+        [label]="exRate.baseCurrency.ticker+'/'+ exRate.quoteCurrency.ticker" 
+        [subLabel]="exRate.baseCurrency.ticker +' a '+ camelize(exRate.quoteCurrency.name)" 
+        [info]="fourDecimals(exRate.buy_rate)" 
+        [outline]="'bottom'">
+    </app-button-link>
+    </div>
+  </ng-container>
+</ion-content>

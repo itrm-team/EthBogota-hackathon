@@ -1,0 +1,72 @@
+<div class="pair-input">
+  <form>
+    <div class="form__select2">
+      <label for="">
+        {{info==0 ? "Recibes:" : "Retirar:"}}
+      </label>
+      <div class="form__select2-icon">
+        <img [src]="'assets/icon/countries/'+selectedSenderCurrency+'.svg'" alt="">
+      </div>
+      <input id="sending_quantity" [ngModel]="sendQuantity" autocomplete="off" placeholder="0"
+      name="sendingQuantity" #sending_quantity max={{userBalance}} (ngModelChange)="senderQuantityChanged($event)">
+        <p>
+          USDC
+        </p>
+    </div>
+    <div class="form__select2"> 
+      <label for="">
+        {{info==0 ? "Pagas:" : "Recibir:"}}
+      </label>
+      <div class="form__select2-icon">
+        <img [src]="'assets/icon/countries/'+selectedRecipientCurrency+'.svg'" alt="">
+      </div>
+      <input id="recipient_quantity" [ngModel]="reciveQuantity" [ngModelOptions]="{standalone: true}"
+      autocomplete="off" placeholder="0" (ngModelChange)="recipientQuantityChanged($event)">
+        <p>
+          {{info==0 ? "COP" : ""}}
+        </p>
+        <select *ngIf="info==1" name="selectedRecipientCurrency" id="selectedRecipientCurrency" 
+        [ngModel]="selectedRecipientCurrency" (ngModelChange)="recipientCurrencyChanged($event)">
+          <option value="COP">COP</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="CAD">CAD</option>
+          <option value="AUD">AUD</option>
+          <option value="GBP">GBP</option>
+          <option value="MXN">MXN</option>
+          <option value="VIIO">VIIO</option>
+          <option value="USDC">USDC</option>
+          <option value="USDT">USDT</option>
+        </select>
+    </div>
+    <div class="msg_validation_exchange">
+      <div class="msg_alert">
+        <p class="alert">
+          {{ maxLimitExchange < numberSendQuantity ? "El limite maximo es de $" + maxLimitExchange + selectedSenderCurrency: ""}} 
+          {{ minLimitExchange > numberSendQuantity ? "El limite minimo es de $" + minLimitExchange + selectedSenderCurrency: ""}} 
+          {{ (info==1 && userBalance < numberSendQuantity && maxLimitExchange >= numberSendQuantity) ? "Saldo insuficiente" : ""}}
+        </p>
+      </div>
+    </div>
+  </form>
+  <div class="pair-input__data">
+    <div class="pair-input__data-item">
+      <app-compare [title]="'Recarga:'" [text]="sendQuantity" [subText]="' '+selectedSenderCurrency" [little]="true"></app-compare>
+    </div>
+    <div class="pair-input__data-item">
+      <app-compare [title]="'Tasa de cambio:'" [text]="comision()" [subText]="' '+selectedSenderCurrency + '/' + selectedRecipientCurrency" [little]="true"></app-compare>
+    </div>
+    <div class="pair-input__data-item">
+      <app-compare [title]="'Valor de giro:'" [text]="reciveQuantity" [subText]="' '+selectedRecipientCurrency" [little]="true"></app-compare>
+    </div>
+    <div class="pair-input__data-item">
+      <app-compare [title]="'Comisión:'" [text]="comisionValue.toString()"  [subText]="' '+selectedRecipientCurrency" [little]="true"></app-compare>
+    </div>
+    <div class="pair-input__data-total">
+      <div class="pair-input__data-item">
+        <app-compare [title]="'Total a pagar:'" [text]="reciveQuantity" [subText]="' '+selectedRecipientCurrency" [little]="true"></app-compare>
+      </div>
+      <p class="p-date">Fecha estimada de llegada: {{getFormattedTodaysDate()}}</p>
+    </div>
+  </div>
+</div>

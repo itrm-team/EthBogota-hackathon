@@ -1,0 +1,292 @@
+<ion-content>
+  <swiper #chargeSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Comprar USDC'" (backEvent)="changeSlide('home')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <app-pair-input [info]=0 (withdrawPayload)="processInitialPayload($event)"></app-pair-input>
+      </div>
+      <div class="charge__btn">
+        <app-button
+          [disable]="!(maxLimitExchange>=amountTransaccion && amountTransaccion>=minLimitExchange)"
+          [label]="'Siguiente'"
+          (click)="(maxLimitExchange>=amountTransaccion && amountTransaccion>=minLimitExchange) && changeSlide('next')"
+        ></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title
+          [title]="'Método de pago'"
+          [arrows]="[true, false]"
+          (backEvent)="changeSlide('back')"
+          (nextEvent)="changeSlide('next')"
+        ></app-title>
+        <app-button-link
+          [mode]="'link'"
+          [icon]="'&#xe902;'"
+          [label]="'Transferencía bancaria'"
+          [outline]="'both'"
+          (click)="createTransfer('transferencia')"
+        ></app-button-link>
+        <app-button-link
+          [mode]="'link'"
+          [icon]="'&#xe904;'"
+          [label]="'PSE, transferencia bancolombia, efectivo '"
+          [outline]="'bottom'"
+          (click)="createTransfer('wompi')"
+        ></app-button-link>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide *ngIf="paymentMethod == 'wompi'">
+      <div class="swiper-slide__container">
+        <app-title
+          [title]="'Pago'"
+          (backEvent)="changeSlide('back')"
+          (nextEvent)="changeSlide('next')"
+          [arrows]='[true,false]'
+        ></app-title>
+        <form ngNoForm action="https://checkout.wompi.co/p/" method="GET" >
+          <!-- OBLIGATORIOS -->
+          <input
+            type="hidden"
+            name="public-key"
+            value="pub_test_PBvM677vv2yCSy4uSa4caBvJACnHUGi0"
+          />
+          <input type="hidden" name="currency" value="COP" />
+          <input
+            type="hidden"
+            name="amount-in-cents"
+            value={{getPrice()*100}}
+          />
+          <input type="hidden" name="reference" value={{getReference()}}/>
+          <input type="hidden" name="redirect-url" value="{{internalUrl}}/response?reference={{getReference()}}" />
+          <button type="submit"  id="wompiButton" hidden>Pagar con Wompi</button>
+        </form>
+        <div class="charge__wompi">
+          <img src="assets/images/pup_land/Frame.svg" class="charge__img">
+          <p class="charge__label">
+            Serás redirigido a la pasarela de pago. Al <br>
+            presionar cargar estás aceptando los términos <br>
+            y condiciones y la política de privacidad para <br>
+            hacer esta compra. 
+          </p>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide *ngIf="paymentMethod == 'transferencia'">
+      <div class="swiper-slide__container">
+        <app-title
+          [title]="'Pago'"
+          [arrows]="[true, false]"
+          (backEvent)="changeSlide('back')"
+          (nextEvent)="changeSlide('next')"
+        ></app-title>
+        <!-- <button id="button-checkout-deuna" value={{shouldOpen()}}>
+          <img src="https://images.getduna.com/logo-full-deuna-D.svg" alt=" DEUNA" />
+          Checkout
+        </button> -->
+        <form #bankForm="ngForm">
+          <label for="bank_q1">Banco</label>
+          <select id="select-menu" [(ngModel)]="selectedBank" ng-model="one" class="bx--text-input" required name="actionSelection" >
+            <option  *ngFor="let actionBank of actionsBank"  [value]="actionBank.id">{{actionBank.name}}</option>
+          </select>
+          <!-- <div class="form__checkbox">
+            <input type="checkbox" id="bank_terms">
+            <label class="form__checkbox-label" for="bank_terms">Al continuar estás aceptando los <span>Terminos y Condiciones</span> y
+            <span>Politicas de Privacidad</span> para realizar esta compra</label>
+          </div> -->
+        </form>
+      </div>
+      <div class="charge__btn">
+        <app-button
+          [label]="'Siguiente'"
+          (click)="changeSlide('next')"
+        ></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide *ngIf="true">
+      <div class="swiper-slide__container">
+        <app-title
+          [title]="'Transferencia bancaria'"
+          (backEvent)="changeSlide('back')"
+          (nextEvent)="changeSlide('next')"
+          [arrows]="[true, false]"
+        ></app-title>
+        <p class="charge__info-text">
+          Adjunta comprobante de transferencia.<br>
+          Recuerda que se cargan tus USDC una vez se<br>
+          verifique la recepción de fondos. Puede tardar<br>
+          hasta 24 horas. * La transferencia debe<br>
+          realizarse desde una cuenta de la que seas<br>
+          titular. 
+        </p>
+        <div class="charge__comparative">
+          <app-subtitle [text]="'Información de pago'"></app-subtitle>
+          <div *ngIf="selectedBank==0">
+            <app-compare
+              [title]="'Banco:'"
+              [text]="'Bancolombia S.A.'"
+            ></app-compare>
+            <app-compare
+              [title]="'Tipo de cuenta:'"
+              [text]="'Corriente'"
+            ></app-compare>
+            <app-compare
+              [title]="'Número de cuenta:'"
+              [text]="'08400000291'"
+            ></app-compare>
+            <app-compare
+              [title]="'Titular:'"
+              [text]="'Intelligent trading machines S.A.S.'"
+            ></app-compare>
+            <app-compare [title]="'NIT:'" [text]="'901.002.150'"></app-compare>
+          </div>
+          <div *ngIf="selectedBank==1">
+            <app-compare
+              [title]="'BANCO:'"
+              [text]="'Davivienda S.A.'"
+            ></app-compare>
+            <app-compare
+              [title]="'Tipo de cuenta:'"
+              [text]="'Ahorros'"
+            ></app-compare>
+            <app-compare
+              [title]="'Número de cuenta:'"
+              [text]="'457470081169'"
+            ></app-compare>
+            <app-compare
+              [title]="'Titular:'"
+              [text]="'Intelligent trading machines S.A.S.'"
+            ></app-compare>
+            <app-compare [title]="'NIT:'" [text]="'901.002.150'"></app-compare>
+          </div>
+        </div>
+        <div class="charge__comparative">
+          <app-compare
+            [title]="'Recarga:'"
+            [text]="formatNumber(amountTransaccion)"
+            [subText]="' '+sendingCurrency"
+          ></app-compare>
+          <app-compare
+            [title]="'Tasa de cambio:'"
+            [text]="formatNumber(selectedExchangeRate.buy_rate)"
+            [subText]="' '+ sendingCurrency + '/' + selectedBaseCurrency"
+          ></app-compare>
+          <app-compare
+            [title]="'Valor de giro:'"
+            [text]="formatNumber(getPrice())"
+            [subText]="' '+selectedBaseCurrency"
+          ></app-compare>
+          <app-compare
+            [title]="'Comisión:'"
+            [text]="formatNumber(comisionValue)"
+            [subText]="' '+selectedBaseCurrency"
+          ></app-compare>
+          <app-compare
+            [title]="'Total a pagar:'"
+            [text]="formatNumber(getPrice())"
+            [subText]="' '+selectedBaseCurrency"
+          ></app-compare>
+        </div>
+        <form #checkBankForm="ngForm" class="center">
+          <div class="form__file">
+            <label for="checkBank__file" *ngIf="checkBankFile == 1" class="form__file-label">
+              <img class="charge__file" src="assets/images/VIIO.svg">
+              <p class="charge__info-text-file">
+                Archivo cargado exitosamente √<br>
+                pulsa siguiente para enviar
+              </p>
+            </label>
+            <label for="checkBank__file" *ngIf="checkBankFile == 0" class="form__file-label">
+              <img class="charge__file" src="assets/images/FILE.svg">
+              <p class="charge__info-text">
+                Toca aquí para cargar <br>
+                tu comprobante<br>
+                (JPG, PNG ó PDF max. 15MB)
+              </p>
+            </label>
+            <input
+              type="file"
+              id="checkBank__file"
+              accept=".pdf,.jpg,.png"
+              (change)="handleFileInput($event)"
+            />
+
+            <div class="msg_alert">
+                <p class="alert">
+                  {{ checkBankFile==0 ? "Archivo requerido" : ""}}
+                </p>
+            </div>
+          </div>
+          
+        </form>
+        <!-- <p class="msg_alert" *ngIf="checkBankFile == 1">Archivo Subido {{nameFile}}</p> -->
+      </div>
+      <div class="charge__btn">
+        <app-button
+          [disable]="!(checkBankFile==1)"
+          [label]="'Siguiente'"
+          (click)="checkBankFile==1 && uploadTransaction()"
+        ></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide *ngIf="true">
+      <div class="swiper-slide__container">
+        <div class="charge__transaction">
+          <div *ngIf="this.chargeStatus == 'success'">
+            <app-transaction-result
+            [title]="'Verificando el estado de su transacción, por favor espere'"
+            [icon]="'&#x63;'"
+            [subtitle]="'Transacción procesada'"
+            [type]="'process'"
+            >
+            </app-transaction-result>
+          </div>
+          <div *ngIf="this.chargeStatus == 'failure'">
+            <app-transaction-result
+            [icon]="'&#xe90f;'"
+            [subtitle]="'Transacción Denegada'"
+            [type]="'denied'"
+            >
+            </app-transaction-result>
+          </div>
+          <div class="charge__comparative">
+            <app-compare
+              [title]="'Recarga:'"
+              [text]="formatNumber(amountTransaccion)"
+              [subText]="' '+sendingCurrency"
+            ></app-compare>
+            <app-compare
+              [title]="'Tasa de cambio:'"
+              [text]="formatNumber(selectedExchangeRate.buy_rate)"
+              [subText]="' '+ sendingCurrency + '/' + selectedBaseCurrency"
+            ></app-compare>
+            <app-compare
+              [title]="'Valor de giro:'"
+              [text]="formatNumber(getPrice())"
+              [subText]="' '+selectedBaseCurrency"
+            ></app-compare>
+            <app-compare
+              [title]="'Comisión:'"
+              [text]="formatNumber(comisionValue)"
+              [subText]="' '+selectedBaseCurrency"
+            ></app-compare>
+            <app-compare
+              [title]="'Total a pagar:'"
+              [text]="formatNumber(getPrice())"
+              [subText]="' '+selectedBaseCurrency"
+            ></app-compare>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="charge__btn">
+          <app-button
+            [label]="'Entendido'"
+            [routerLink]="['/dashboard/viio']"
+          ></app-button>
+        </div>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

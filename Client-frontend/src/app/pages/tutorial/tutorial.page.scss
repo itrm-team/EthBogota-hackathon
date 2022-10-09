@@ -1,0 +1,29 @@
+ion-content {
+  --background-color: #F5F5F5;
+  --padding-top: 0;
+
+  .swiper-slide__container{
+    margin-top: var(--margin-btn);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 60%;
+
+    .tutorial__img-wrapper {
+      height: 270px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: 30px;
+
+      img{
+        height: 100%;
+      }
+    }
+  }
+  
+  .tutorial__btn {
+    margin-bottom: var(--margin-btn);
+  }
+}

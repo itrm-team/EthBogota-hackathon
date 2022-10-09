@@ -1,0 +1,54 @@
+.menu {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 30px 20px;
+  border: none;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0px 4px 15px #d9d9d9;
+  padding: 10px;
+  ion-tab-button {
+    font-family: var(--font-work);
+    font-weight: 300;
+    background-color: transparent;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --color-selected: var(--color-accent) !important;
+
+    .dashboard__icon {
+      font-family: var(--font-iconSet2);
+      font-size: 2rem;
+    }
+
+    ion-icon {
+      font-size: 38px;
+      color: var(--color-dark);
+      --ionicon-stroke-width: 10px;
+    }
+
+    ion-label {
+      font-size: 0.7rem;
+      color: var(--color-dark);
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .dashboard__viio-btn {
+      width: 43px;
+      height: 39px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      background: #ffffff;
+      box-shadow: 2px 2px 5px #bbb,       
+      -2px -2px 5px #efefef;
+      img {
+        transform: translateX(1px);
+}
+    }
+
+    
+  }
+}

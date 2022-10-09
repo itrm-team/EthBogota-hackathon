@@ -1,0 +1,119 @@
+<ion-content>
+  <swiper #securitySwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Seguridad'" [arrows]="[true, false]" (backEvent)="changeSlide('home')"></app-title>
+        <app-button-link [icon]="'b'" [label]="'Actualizar contraseña'" [outline]="'both'" (click)="changeSlide('next')"></app-button-link>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Actualizar contraseña'" [arrows]="[true, false]" (backEvent)="changeSlide('back')"></app-title>
+        <form>
+          <label for="">Contraseña actual</label>
+          <div class="input-group col-6 mx-auto">
+            <div class="form__password">
+              <input 
+              [type]="showPassword ? 'text' : 'password'" 
+              class="input"  
+              name="currentPassword" 
+              [class.alert]="passworderror.invalid &&
+              (passworderror.dirty || passworderror.touched)"
+              [(ngModel)]="oldPassword"
+              placeholder="Contraseña"
+              [ngModelOptions]="{ updateOn: 'change' }"
+              #passworderror="ngModel"
+              required
+              >
+            
+              <div class="icon">
+                <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword = !showPassword"
+                [class.hide]="showPassword">
+                <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword = !showPassword"
+                [class.hide]="!showPassword">
+              </div>
+            </div>
+            <div class="msg_alert">
+                <div
+                *ngIf="
+                passworderror.invalid &&
+                (passworderror.dirty || passworderror.touched)
+              "
+                >
+                <p class="alert">
+                  {{ passworderror.errors.required ? "Contraseña requerida" : "" }}
+                </p>
+                </div>
+            </div>
+          </div>
+          
+          <label>Nueva contraseña</label>
+
+          <div class="input-group col-6 mx-auto">
+            <div class="form__password">
+              <input [type]="showPassword2 ? 'text' : 'password'" name="newPassword" 
+              [class.alert]="passeorderror.invalid && (passeorderror.dirty || passeorderror.touched)"
+              [(ngModel)]="newPassword" placeholder="Nueva Contraseña" [ngModelOptions]="{ updateOn: 'change' }"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\$@!.:,/#_%=&\+\?\*\^\-])([A-Za-z0-9\$@!.:,/#_%=&\+\?\*\^\-]|[^ ]){8,}$" required
+              #passeorderror="ngModel" >
+
+              <div class="icon">
+                <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword2 = !showPassword2"
+                [class.hide]="showPassword2">
+                <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword2 = !showPassword2"
+                [class.hide]="!showPassword2">
+              </div>
+            </div>
+
+            <!-- Validators contraseña -->
+            <div class="msg_alert">
+              <div *ngIf="passeorderror.invalid && (passeorderror.dirty || passeorderror.touched)">
+                <p class="alert">
+                  {{ passeorderror.errors.required ? "Contraseña requerida" : ""}}
+                </p>
+                <div *ngIf="passeorderror.errors.pattern">
+                    <p class="alert"> 
+                      {{ newPassword.match('[A-Z]') ? "" : "Mayúscula faltante,"}} 
+                      {{ newPassword.match('[a-z]') ? "" : "Minúscula faltante,"}} 
+                      {{ newPassword.match('[0-9]') ? "" : "Número faltante,"}} 
+                      {{ newPassword.match('[\$@!.:,/#_%=&\+\?\*\^\-]') ? "" : "Caracter especial faltante,"}} 
+                      {{ newPassword.match('[A-Za-z0-9\d\$@!.:,/#_%=&\+\?\*\^\-]{8,}') ? "" : "Minimo 8 caracteres"}} 
+                      verifica tu contraseña.
+                    </p>
+                  </div>
+              </div>
+            </div>
+          </div> 
+          <label>Confirmar nueva contraseña</label>
+
+          <div class="input-group col-6 mx-auto">
+            <div class="form__password">
+              <input [type]="showPassword3 ? 'text' : 'password'" name="confirmPassword" 
+              [class.alert]="(veriPassworderror.dirty || veriPassworderror.touched) && newPassword!=confirmPassword"
+              [(ngModel)]="confirmPassword"
+              placeholder="Contraseña" [ngModelOptions]="{ updateOn: 'change' }"
+              #veriPassworderror="ngModel" required>
+            
+              <div class="icon">
+                <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword3 = !showPassword3"
+                [class.hide]="showPassword3">
+                <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword3 = !showPassword3"
+                [class.hide]="!showPassword3">
+              </div>
+            </div>
+           <!-- Validators contraseña -->
+           <div  class="msg_alert">
+                <p class="alert">
+                  {{(veriPassworderror.dirty || veriPassworderror.touched) && newPassword!=confirmPassword ? "Las contraseñas deben ser iguales" : ""}}
+                </p>
+          </div>
+        </div>
+        </form>
+      </div>
+      <div class="security__btn">
+        <app-button [label]="'Actualizar'" [disable]="!(newPassword==confirmPassword && passeorderror.valid && veriPassworderror.valid)" 
+        (click)="newPassword==confirmPassword && passeorderror.valid && veriPassworderror.valid && updatePassword()"></app-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

@@ -1,0 +1,4 @@
+<div class="button" [class.button--light]="light" [class.button--icon]="isIcon" [class.button--disable]="disable">
+  <ion-icon name="{{icon}}" *ngIf="isIcon"></ion-icon>
+  <p class="button__label" *ngIf="!isIcon">{{label}}</p>
+</div>

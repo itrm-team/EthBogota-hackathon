@@ -1,0 +1,39 @@
+<ion-content>
+  <div class="web3" *ngIf="mode == 'connect'">
+    <img class="img" src="assets/images/web3/web3_wallet.svg" alt="Card" width="250">
+    <p class="title">
+      Conexión Web3
+    </p>
+    <p>
+      Conecta tu billetera non-custodial<br>
+      y utiliza tus fondos en el mundo web3
+    </p>
+    <ion-button (click)="connect()">Conectar</ion-button>
+  </div>
+  <div class="config" *ngIf="mode == 'connected'">
+      <div class="config__data">
+        <h2 class="config__data-title">WEB3 Area</h2>
+        <!-- <p class="config__data-name">Nombre Apellido</p> -->
+      </div>
+      <div class="config__btns">
+        <app-button-link
+          [label]="'Comprar ETH'"
+          [icon]="'&#xe907;'"
+          [outline]="'both'"
+          [routerLink]="['purchase-eth']"
+        >
+        </app-button-link>
+        <app-button-link
+          [label]="'Configurar Guardianes'"
+          [icon]="'&#xe908;'"
+          [outline]="'bottom'"
+          [routerLink]="['configure-guardians']"
+        >
+        </app-button-link>
+        </div>
+    </div>
+  <div class="web3" *ngIf="mode == 'invalid'">
+    <div><p>La billetera conectada no corresponde a la vinculada en VIIO.<br>Inténtalo de nuevo</p></div>
+    <ion-button (click)="connect()">Conectar</ion-button>
+  </div>
+</ion-content>

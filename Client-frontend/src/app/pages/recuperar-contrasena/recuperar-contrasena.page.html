@@ -1,0 +1,159 @@
+<ion-content>
+  <swiper #recoverPasswordSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title 
+        [title]="'Preguntas de seguridad'" 
+        (backEvent)="changeSlide('home')"
+        [arrows]='[true,false]'>
+      </app-title>
+        <form #securityForm="ngForm">
+          <p class="p center pad-b">Responde a tus preguntas de seguridad para crear una nueva contraseña</p>
+          <div>
+            <div *ngIf="selectedOption==1">
+              <label>1. Cuál era el nombre de tu mascota de la infancia?</label>
+            </div>
+            <div *ngIf="selectedOption==2">
+              <label>2. Dónde estudiaste la primaria?</label>
+            </div>
+            <div *ngIf="selectedOption==3">
+              <label>3. Cuál es su banda o artista favorito?</label>
+            </div>
+            <div *ngIf="selectedOption==4">
+              <label>4. Nombre de la empresa donde trabajo por primera vez?</label>
+            </div>
+          </div>
+
+          <input type="text" name="recover_q1" [(ngModel)]="account.questionR1" autocomplete="off" [class.alert]="displayControl(q1error)"
+            [ngModelOptions]="{ updateOn: 'change' }" #q1error="ngModel" pattern="[a-zA-Z 0-9._%+-]{1,15}" placeholder="Responde pregunta de seguridad" required />
+          <!-- Validator q1 -->
+          <div class="msg_alert">
+            <div *ngIf="displayControl(q1error)">
+              <p class="alert">
+                {{ q1error.errors.required ? "Este campo es requerido" : ""}}
+              </p>
+            </div>
+          </div>
+
+
+          <div>
+            <div *ngIf="selectedOption2==1">
+              <label>1. ¿Cuál era el nombre de tu mascota de la infancia?</label>
+            </div>
+            <div *ngIf="selectedOption2==2">
+              <label>2. ¿Dónde estudiaste la primaria?</label>
+            </div>
+            <div *ngIf="selectedOption2==3">
+              <label>3. ¿Cuál es su banda o artista favorito?</label>
+            </div>
+            <div *ngIf="selectedOption2==4">
+              <label>4. ¿Nombre de la empresa donde trabajo por primera vez?</label>
+            </div>
+          </div>
+
+
+          <input type="text" id="sign-up_q2" name="sign-up_q2" [(ngModel)]="account.questionR2" [class.alert]="displayControl(q2error)"
+            autocomplete="off" [ngModelOptions]="{ updateOn: 'change' }" #q2error="ngModel" pattern="[a-zA-Z 0-9._%+-]{1,25}" placeholder="Responde pregunta de seguridad" required />
+          <!-- Validator q2 -->
+          <div class="msg_alert">
+            <div *ngIf="displayControl(q2error)">
+              <p class="alert">
+                {{ q2error.errors.required ? "Este campo es requerido" : ""}}
+              </p>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="recuperar__btn">
+        <app-button [label]="'Continuar'" [disable]="!(q1error.valid && q2error.valid)" (click)="q1error.valid && q2error.valid && questions()"></app-button>
+      </div>
+
+    </ng-template>
+
+
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title 
+          [title]="'Configura tu contraseña'" 
+          (backEvent)="changeSlide('home')"
+          [arrows]="[true, false]">
+        </app-title>
+        <form #passwordForm="ngForm">
+          <p class="p center pad-b">Debe contener al menos 8 carácteres, 1 mayúscula,<br>1
+            minúscula, 1 número y 1 caracter especial.</p>
+          <label>Contraseña</label>
+
+          <div class="input-group col-6 mx-auto">
+            <div class="form__password">
+              <input [type]=" showPassword ? 'text' : 'password'" class="form-control" 
+              [class.alert]="displayControl(passworderror)"
+                id="recover_password" name="recover_password"  [(ngModel)]="newPassword"
+                [ngModelOptions]="{ updateOn: 'change' }" #passworderror="ngModel" 
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\$@!.:,/#_%=&\+\?\*\^\-])([A-Za-z0-9\$@!.:,/#_%=&\+\?\*\^\-]|[^ ]){8,}$" required
+                
+                />
+
+              <div class="icon">
+                <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword = !showPassword"
+                [class.hide]="showPassword">
+                <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword = !showPassword"
+                [class.hide]="!showPassword">
+              </div>
+            </div>
+            <!-- Validators contraseña -->
+            <div class="msg_alert">
+              <div *ngIf="displayControl(passworderror)">
+                <p class="alert">
+                  {{ passworderror.errors.required ? "Contraseña requerida" : ""}}
+                </p>
+                <div *ngIf="passworderror.errors.pattern">
+                    <p class="alert"> 
+                      {{ newPassword.match('[A-Z]') ? "" : "Mayúscula faltante,"}} 
+                      {{ newPassword.match('[a-z]') ? "" : "Minúscula faltante,"}} 
+                      {{ newPassword.match('[0-9]') ? "" : "Número faltante,"}} 
+                      {{ newPassword.match('[\$@!.:,/#_%=&\+\?\*\^\-]') ? "" : "Caracter especial faltante,"}} 
+                      {{ newPassword.match('[A-Za-z0-9\d\$@!.:,/#_%=&\+\?\*\^\-]{8,}') ? "" : "Minimo 8 caracteres"}} 
+                      verifica tu contraseña.
+                    </p>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <label>Verificación de contraseña</label>
+          <div class="input-group col-6 mx-auto">
+            <div class="form__password">
+              <input [type]=" showPassword2 ? 'text' : 'password' " class="form-control" 
+              [class.alert]="(veriPassworderror.dirty || veriPassworderror.touched) && newPassword!=retypepassword"
+              id="sign-up_password-confirmation" name="sign_up_password-confirmation"
+              [(ngModel)]="retypepassword" [ngModelOptions]="{ updateOn: 'change' }"
+              #veriPassworderror="ngModel" required/>
+
+                <div class="icon">
+                  <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword2 = !showPassword2"
+                  [class.hide]="showPassword2">
+                  <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword2 = !showPassword2"
+                  [class.hide]="!showPassword2">
+                </div>
+              </div>
+              
+          <!-- Validators contraseña -->
+          <div  class="msg_alert">
+              <p class="alert">
+                {{(veriPassworderror.dirty || veriPassworderror.touched) && newPassword!=retypepassword ? "Las contraseñas deben ser iguales" : ""}}
+              </p>
+          </div>
+        </div>
+        </form>
+
+      </div>
+      
+      <div class="recuperar__btn">
+        <app-button [label]="'Continuar'" [disable]="!((newPassword==retypepassword) && (passworderror.valid && veriPassworderror.valid))"
+        (click)="((newPassword==retypepassword) && (passworderror.valid && veriPassworderror.valid)) && recoverPassword(token)"></app-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

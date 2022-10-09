@@ -1,0 +1,51 @@
+<ion-content>
+  <div class="config">
+    <div class="config__data">
+      <h2 class="config__data-title">Configuración</h2>
+      <!-- <p class="config__data-name">Nombre Apellido</p> -->
+    </div>
+    <div class="config__btns">
+      <app-button-link
+        [label]="'Mis Datos'"
+        [icon]="'&#xe907;'"
+        [outline]="'both'"
+        [routerLink]="['/user-data']"
+      >
+      </app-button-link>
+      <app-button-link
+        [label]="'Seguridad'"
+        [icon]="'&#xe908;'"
+        [outline]="'bottom'"
+        [routerLink]="['/security']"
+      >
+      </app-button-link>
+      <app-button-link-ayuda
+        [label]="'Ayuda'"
+        [icon]="'&#xe905;'"
+        [outline]="'bottom'"
+      >
+      </app-button-link-ayuda>
+      <a 
+      class=""
+      href="https://drive.google.com/file/d/1JC1jjUHpqnxac-yrOKYsfzxh-aRn0RUq/view" 
+      target="_blank" 
+      rel="noopener noreferrer">
+        <app-button-link
+        [label]="'Terminos y condiciones'"
+        [icon]="'&#xe909;'"
+        [outline]="'bottom'"
+        [link]="''"
+        >
+        </app-button-link>
+      </a>
+        <app-button-link
+          [label]="'Cerrar Sesión'"
+          [icon]="'&#xe900;'"
+          [outline]="'bottom'"
+          (click)="presentModal()"
+        >
+        </app-button-link>
+      
+    </div>
+  </div>
+</ion-content>

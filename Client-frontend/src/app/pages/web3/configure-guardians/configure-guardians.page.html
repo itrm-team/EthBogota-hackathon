@@ -1,0 +1,33 @@
+<ion-content>
+  <!--<p>Configurar Guardianes</p>-->
+  <swiper #userDataSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Configurar Guardianes'"  [arrows]="[true, false]" (backEvent)="changeSlide('home')"></app-title>
+        <app-compare [title]="'Guardianes:'" [text]="currentUser.email"></app-compare>
+        <form>
+          <input type="text" chatInput name="currentGuardian" [(ngModel)]="currentGuardian"/>
+          <app-button [label]="'Agregar guardian'" (click)="addGuardian()"></app-button>
+        </form>
+        <div style="margin-top: 20px;">
+          <app-title [title]="'Guardianes actuales'"  [arrows]="[false, false]" ></app-title>
+        </div>
+        <div style="overflow-y: scroll; height: 20vh;">
+          <div class="guardian-list__title" style="margin-bottom: 15px;">
+            <p>#</p>
+            <p>Dirección web3 del guardian</p>
+            <P>Eliminar</P>
+          </div>
+          <div *ngFor="let guardian of guardians; let i = index" class="guardian-list"  >
+            <p class="guardian-list__index">{{i + 1}}</p>
+            <p class="guardian-list__address">{{guardian.address}}</p>
+            <p><button (click)="deleteGuardian(i)" class="guardian-list__btn"><ion-icon name="trash-outline"></ion-icon></button></p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="user-data__btn">
+        <app-button [label]="'Actualizar Datos'" (click)="presentModal()"></app-button>
+      </div> -->
+    </ng-template>
+  </swiper>
+</ion-content>

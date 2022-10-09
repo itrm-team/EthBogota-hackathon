@@ -1,0 +1,18 @@
+<div class="button-link" [class.list]="mode === 'list'" [class.info]="mode === 'info'" [class]="outline">
+  <div *ngIf="mode !== 'info'" class="button-link__icon" [class.denied]="status.toLowerCase() === 'rechazada'" [class.waiting]="status.toLowerCase() === 'en validación' || status.toLowerCase() === 'recibida'">{{icon}}</div>
+  <img type="img" *ngIf="mode === 'info'" class="button-link__src" src="{{src}}">
+  <div class="button-link__text">
+    <p class="button-link__text-label">{{label}}
+
+    </p>
+    <p *ngIf="mode !== 'link'" class="button-link__text-sublabel">{{subLabel}}</p>
+  </div>
+  <div class="button-link__data">
+    <ion-icon *ngIf="mode === 'link'" class="button-link__data-arrow" name="caret-forward-outline"></ion-icon>
+    <p *ngIf="mode === 'list' && !(status.toLowerCase() === 'en validación' || status.toLowerCase() === 'recibida')"  class="button-link__data-info" [class.add]="info >= 0">{{info >= 0?'+':'-'}} {{formatter.format(abs(info))}} $</p>
+    <p *ngIf="mode === 'info' && info" class="button-link__data-info">{{info}} $</p>
+    <p *ngIf="mode === 'list' && status.toLowerCase() === 'rechazada'" class="button-link__data-info denied">rechazada</p>
+    <p *ngIf="mode === 'list' && (status.toLowerCase() === 'en validación' || status.toLowerCase() === 'recibida')" class="button-link__data-info waiting">pendiente</p>
+    
+  </div>
+</div>

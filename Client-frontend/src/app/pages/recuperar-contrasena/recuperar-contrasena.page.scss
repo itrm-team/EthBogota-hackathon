@@ -1,0 +1,27 @@
+.recuperar__btn {
+  margin-bottom: var(--margin-btn);
+}
+
+form {
+    .hide {
+      display: none;
+    }
+
+    .inner-addon {
+      position: relative;
+    }
+
+    .left-addon input {
+      padding-left: 30px;
+    }
+
+    .right-addon input {
+      padding-right: 30px;
+    }
+
+    .cVerificacion input {
+      float: left;
+      position: inline;
+    }
+}
+

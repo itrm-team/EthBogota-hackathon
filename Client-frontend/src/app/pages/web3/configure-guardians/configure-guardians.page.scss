@@ -1,0 +1,29 @@
+.guardian-data__btn {
+    margin-bottom: var(--margin-btn);
+}
+
+.guardian-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+}
+
+.guardian-list__title {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+}
+
+.guardian-list__btn {
+    background-color: #fff;
+    border: none;
+    color: black;
+    text-align: left;
+}
+
+p.pos_fixed {
+    position: relative;
+    padding: 1em 0;
+    margin: 0;
+    text-align:center;
+}

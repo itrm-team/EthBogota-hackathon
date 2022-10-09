@@ -1,0 +1,38 @@
+$margin: 2px;
+
+.compare {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  color: var(--color-dark);
+  font-size: var(--fontSize-body);
+  color: var(--color-dark);
+
+  &__title {
+    font-family: var(--font-work);
+    margin: $margin 0;
+    text-align: initial;
+    text-transform: uppercase;
+  }
+
+  &__text {
+    font-family: var(--font-work);
+    font-weight: 300;
+    margin: $margin 0;
+    text-align: right;
+  }
+
+  &__subtext {
+    font-family: var(--font-work);
+    font-weight: 300;
+    margin: $margin 0;
+  }
+
+  &.little {
+    font-size: 0.6rem;
+  }
+
+  &.accent {
+    color: var(--color-accent);
+  }
+}

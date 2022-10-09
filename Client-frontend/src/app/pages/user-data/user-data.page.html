@@ -1,0 +1,59 @@
+<ion-content>
+  <swiper #userDataSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Mis datos'"  [arrows]="[true, false]" (backEvent)="changeSlide('home')"></app-title>
+        <app-compare [title]="'Correo:'" [text]="currentUser.email"></app-compare>
+        <!-- <app-compare [title]="'Telefono:'" [text]="currentUser.phone"></app-compare> -->
+      </div>
+      <div class="user-data__btn">
+        <app-button [label]="'Actualizar Datos'" (click)="calculateTime()"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Actualiza tus datos'" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <form>
+
+          <label for="">*Correo:</label>
+
+          <!-- Paramters email -->
+          <input type="text" name="new_email" autocomplete="off" disabled="true" [class.alert]="displayControl(emailerror)"
+          [(ngModel)]="newEmail" [ngModelOptions]="{ updateOn: 'change' }"
+          #emailerror="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
+
+          <!-- Validators email -->
+          <div class="msg_alert">
+            <div *ngIf="displayControl(emailerror)">
+              <p class="alert">
+                {{emailerror.errors.required ? "Correo requerido": "" }}
+                {{emailerror.errors.pattern ? "Correo invalido": "" }}
+              </p>
+            </div>
+          </div>
+
+          <label for="">*Telefono</label>
+
+          <!-- Paramters celphone -->
+          <input type="number" name="new_celphone" [(ngModel)]="newCelphone" 
+          [class.alert]="displayControl(celphoneError)"
+          [ngModelOptions]="{ updateOn: 'change' }"
+          #celphoneError="ngModel" pattern="[0-9._%+-]{6,}" required/>
+
+          <!-- Validators celphone -->
+          <div class="msg_alert">
+            <div *ngIf="displayControl(celphoneError)">
+              <p class="alert">
+                {{celphoneError.errors.required ? "Este campo es requerido": "" }}
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="user-data__btn">
+        <app-button [label]="'Actualizar'" [disable]="!(celphoneError.valid)" 
+        (click)="celphoneError.valid && presentModal()"></app-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

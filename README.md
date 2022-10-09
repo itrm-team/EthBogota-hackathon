@@ -1,2 +1,2 @@
-# EthBogota-hackathon
-Public repository for the EthBogota hackathon
+# viio-backbone
+Viio backbone repo for all things app

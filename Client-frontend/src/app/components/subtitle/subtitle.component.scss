@@ -1,0 +1,17 @@
+.subtitle {
+  font-family: var(--font-work);
+  font-size: var(--fontSize-subtitle);
+  font-weight: 400;
+  color: var(--color-accent);
+  text-align: center;
+
+  &.alert {
+    color: var(--color-alert);
+  }
+  &.denied{
+    color: var(--color-alert);
+  }
+  &.warn {
+    color: var(--color-warn);
+  }
+}

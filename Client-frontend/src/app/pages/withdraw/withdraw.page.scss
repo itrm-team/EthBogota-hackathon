@@ -1,0 +1,93 @@
+.withdraw__btn {
+  margin-bottom: var(--margin-btn);
+}
+
+.p-date{
+  position: fixed;
+  bottom: 5.7rem;
+  left: 22%;
+}
+
+.withdraw__comparative {
+  margin-top: 20px;
+}
+
+.transfer-graph {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 30px;
+
+  &__wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+
+  $userWidth: 70px;
+
+  &__user {
+    width: $userWidth;
+    height: $userWidth;
+    border: 1px solid var(--color-dark);
+    border-radius: $userWidth;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-img {
+      border-radius: $userWidth;
+    }
+  }
+
+  &__process {
+    position: relative;
+    height: 100px;
+
+    &-line {
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background: var(--color-accent);
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    $iconWidth: 30px;
+
+    &-icon {
+      position: absolute;
+      width: $iconWidth;
+      height: $iconWidth;
+      background: var(--color-light);
+      border: 1px solid var(--color-dark);
+      border-radius: $iconWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      img {
+        border-radius: $iconWidth;
+      }
+    }
+  }
+
+  &__user-to {
+    width: $userWidth;
+    height: $userWidth;
+    border: 1px solid var(--color-dark);
+    border-radius: $userWidth;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-img {
+      border-radius: $userWidth;
+    }
+  }
+}

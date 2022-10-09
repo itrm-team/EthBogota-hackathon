@@ -1,0 +1,51 @@
+<ion-content>
+  <swiper #recoverSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title
+          [title]="'Ingresa tu correo electrónico'"
+          (backEvent)="changeSlide('home')"
+          [arrows]='[true,false]'
+        ></app-title>
+        <form #verificationForm="ngForm" novalidate>
+          <p class="p center pad-b">
+            Enviaremos un link de recuperación a tu correo<br/>
+            registrado para verificar que tienes acceso.<br />
+          </p>
+          <label class="recover_email">Correo electrónico</label>
+          <input
+            class="input"
+            name="email"
+            type="email"
+            [class.alert]="displayControl(emailerror)"
+            [(ngModel)]="account.email"
+            required
+            spellcheck="false"
+            #emailAddress="ngModel"
+            autocapitalize="off"
+            autocomplete="off"
+            placeholder="Correo electrónico"
+            [ngModelOptions]="{ updateOn: 'change' }"
+            #emailerror="ngModel"
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          />
+          <div class="msg_alert">
+            <div *ngIf="emailerror.invalid && (emailerror.dirty || emailerror.touched)">
+              <p class="alert">
+                {{emailerror.errors.required ? "Digite un email" : ""}}
+                {{emailerror.errors.pattern ? "Email invalido" : ""}}
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="recover__btn">
+        <app-button
+          [label]="'Enviar'"
+          [disable]="!emailerror.valid"
+          (click)="emailerror.valid && recover()"
+        ></app-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

@@ -1,0 +1,37 @@
+:host {
+  width: 100%;
+}
+
+.title {
+  position: relative;
+  font-family: var(--font-work);
+  width: 100%;
+  margin-bottom: 30px;
+  color: var(--color-title);
+  
+  .title__content {
+    font-size: var(--fontSize-title);
+    font-weight: 300;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+  }
+
+  .title__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.left {
+      left: 0;
+    }
+
+    &.right {
+      right: 0;
+    }
+  }
+
+  &.light {
+    color: var(--color-light);
+  }
+}

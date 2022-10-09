@@ -1,0 +1,8 @@
+
+<div class="transaction">
+  <div *ngIf="type !== 'success'" class="transaction__icon" [class.warn]="type === 'process'" [class.denied]="type === 'denied'">{{icon}}</div>
+  <img type="img" *ngIf="type === 'success'" class="transaction__src" src="{{src}}">
+    <p class="transaction__content">Resultado de la operación:</p>
+    <p class="transaction__subtitle" [class.warn]="type === 'process'" [class.denied]="type === 'denied'">{{subtitle}}</p>
+
+</div>

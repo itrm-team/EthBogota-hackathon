@@ -1,0 +1,207 @@
+<ion-content>
+  <swiper #signUpSwiper [config]="config" [virtual]="true">
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Ingresa tu correo electrónico'" (backEvent)="changeSlide('home')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <form #registerForm="ngForm" required>
+
+          <p class="info-text">
+            A este correo se asociará tu billetera. Por favor verifica que esté escrito correctamente antes de continuar.
+          </p>
+          <!-- Parameters email -->
+          <label for="sign-up_email">*Correo electrónico</label>
+          <input type="email" id="sign-up_email" [class.alert]="displayControl(emailerror)" 
+          placeholder="abc@gmail.com" autocomplete="off"
+          name="sign-up_email" [(ngModel)]="email" [ngModelOptions]="{ updateOn: 'change' }"
+          #emailerror="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
+
+          <!-- Validators email -->
+          <div class="msg_alert" >
+            <div *ngIf="displayControl(emailerror)">
+              <p class="alert">
+                {{emailerror.errors.required ? "Email es requerido": "" }}
+                {{emailerror.errors.pattern ? "Email es invalido": "" }}
+              </p>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="sing-up__btn">
+        <div class="checkbox">
+          <input type="checkbox" id="sign_up_terms" name="sign_up_terms" 
+          [(ngModel)]="sign_up_terms">
+          <label class="form__checkbox-label" for="sign-up_terms">He Leído y acepto los  
+            <a class="show_terms_and_conditions" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1JC1jjUHpqnxac-yrOKYsfzxh-aRn0RUq/view"> 
+              Terminos y Condiciones
+            </a>
+          </label>  
+        </div>
+        <app-button [label]="'Continuar'" [disable]="!(emailerror.valid && sign_up_terms)" 
+        (click)="emailerror.valid && sign_up_terms && validateEmail()"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Preguntas de seguridad'" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <form #securityForm="ngForm">
+          <p class="info-text">
+            Responde estas preguntas para que puedas recuperar tu contraseña en un futuro
+          </p>
+        
+          <!-- Parameters q1 -->
+          <select id="select-menu-q1" [(ngModel)]="selectedOption" ng-model="one" class="bx--text-input" required name="actionSelection" >
+            <option  *ngFor="let action of actions"  [value]="action.id">{{action.name}}</option>
+          </select>
+
+          <!-- Validator q1 -->
+          <input type="text" id="sign-up_q1" name="sign-up_q1" [(ngModel)]="sign_up_q1" autocomplete="off" [class.alert]="displayControl(q1error)"
+          [disabled]="!(selectedOption==1 || selectedOption==2 || selectedOption==3 || selectedOption==4)"
+          [ngModelOptions]="{ updateOn: 'change' }" #q1error="ngModel" required />
+            
+          <div class="msg_alert" >
+            <div *ngIf="displayControl(q1error)">
+              <p class="alert">
+                {{q1error.errors.required ? "Este campo es requerido": "" }}
+              </p>
+            </div>
+          </div>
+          
+          <!-- Parameters q2 -->
+          <select id="select-menu-q2" [(ngModel)]="selectedOption2" class="bx--text-input" required name="actionSelection2" >
+            <option  *ngFor="let action2 of actions2"  [value]="action2.id2">{{action2.name2}}</option>
+          </select>
+          
+          <!-- Validator q2 -->
+          <input type="text" id="sign-up_q2" name="sign-up_q2" [(ngModel)]="sign_up_q2" autocomplete="off"  [class.alert]="displayControl(q2error)"
+          [disabled]="!((selectedOption2==1 || selectedOption2== 2 || selectedOption2==3 || selectedOption2==4) 
+          && selectedOption2!=selectedOption)"
+          [ngModelOptions]="{ updateOn: 'change' }" #q2error="ngModel" required />
+          
+          <div class="msg_alert">
+            <p class="alert">
+              {{selectedOption==selectedOption2 && (selectedOption2!=0) ? "Seleccione otra pregunta, para habilitar el campo": "" }}
+            </p>
+            <div *ngIf="displayControl(q2error)">
+              <p class="alert">
+                {{q2error.errors.required ? "Este campo es requerido": "" }}
+              </p>
+            </div>
+          </div>
+        </form>
+      </div> 
+      <div class="sing-up__btn">
+        <app-button [label]="'Continuar'" [disable]="!(q1error.valid && q2error.valid)" 
+        (click)="q1error.valid && q2error.valid && changeSlide('next')"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Configura tu contraseña'" [arrows]="[true, false]" (backEvent)="changeSlide('back')" (nextEvent)="changeSlide('next')" [arrows]='[true,false]'></app-title>
+        <form #passwordForm="ngForm">
+          <p class="info-text">
+            Debe contener al menos <br>8 caracteres, 1 mayúscula, 1 minúscula,<br> 1 número y 1 caracter especial.
+          </p>
+          <label for="sign-up_password">Contraseña</label>
+          
+          <!-- Campo contraseña -->
+
+            <div class="input-group col-6 mx-auto">
+              <div class="form__password">
+                <input [type]=" showPassword ? 'text' : 'password'" class="form-control" [class.alert]="displayControl(passworderror)"
+                id="sign-up_password" name="sign_up_password"  [(ngModel)]="sign_up_password"
+                [ngModelOptions]="{ updateOn: 'change' }" #passworderror="ngModel" 
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\$@!.:,/#_%=&\+\?\*\^\-])([A-Za-z0-9\$@!.:,/#_%=&\+\?\*\^\-]|[^ ]){8,}$" required
+                
+                />
+
+                <div class="icon">
+                  <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword = !showPassword"
+                  [class.hide]="showPassword">
+                  <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword = !showPassword"
+                  [class.hide]="!showPassword">
+                </div>
+              </div>
+
+              <!-- Validators contraseña -->
+              <div class="msg_alert">
+                <div *ngIf="displayControl(passworderror)">
+                  <p class="alert">
+                    {{ passworderror.errors.required ? "Contraseña requerida" : ""}}
+                  </p>
+                  <div *ngIf="passworderror.errors.pattern">
+                    <p class="alert"> 
+                      {{ sign_up_password.match('[A-Z]') ? "" : "Mayúscula faltante,"}} 
+                      {{ sign_up_password.match('[a-z]') ? "" : "Minúscula faltante,"}} 
+                      {{ sign_up_password.match('[0-9]') ? "" : "Número faltante,"}} 
+                      {{ sign_up_password.match('[\$@!.:,/#_%=&\+\?\*\^\-]') ? "" : "Caracter especial faltante,"}} 
+                      {{ sign_up_password.match('[A-Za-z0-9\$@!.:,/#_%=&\+\?\*\^\-]{8,}') ? "" : "Minimo 8 caracteres"}} 
+                      verifica tu contraseña.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <label for="sign-up_password-confirmation">Confirma tu contraseña</label>
+
+          <!-- Campo confirmar contraseña -->
+          <div class="form__password">
+            <input [type]=" showPassword2 ? 'text' : 'password' " class="form-control" 
+              [class.alert]="(veriPassworderror.dirty || veriPassworderror.touched) && sign_up_password!=sign_up_password_confirmation"
+              id="sign-up_password-confirmation" name="sign_up_password-confirmation"
+              [(ngModel)]="sign_up_password_confirmation" [ngModelOptions]="{ updateOn: 'change' }"
+              #veriPassworderror="ngModel" required/>
+              
+            <div class="icon">
+              <img src="assets/icon/password/show-password.svg" alt="" (click)="showPassword2 = !showPassword2"
+              [class.hide]="showPassword2">
+              <img src="assets/icon/password/hide-password.svg" alt="" (click)="showPassword2 = !showPassword2"
+              [class.hide]="!showPassword2">
+            </div>
+          </div>
+            <!-- Validators verificar contraseña -->
+            <div  class="msg_alert">
+                <p class="alert">
+                  {{(veriPassworderror.dirty || veriPassworderror.touched) && sign_up_password!=sign_up_password_confirmation ? "Las contraseñas deben ser iguales" : ""}}
+                </p>
+          </div>
+        </form>
+      </div>
+      <div class="sing-up__btn">
+        <app-button [label]="'Continuar'" [disable]="!(sign_up_password==sign_up_password_confirmation && passworderror.valid && veriPassworderror.valid)" 
+        (click)="sign_up_password==sign_up_password_confirmation && passworderror.valid && veriPassworderror.valid && sendCode()"></app-button>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="swiper-slide__container">
+        <app-title [title]="'Ingresa tu código'" [arrows]="[true, false]" (backEvent)="changeSlide('back')" (nextEvent)="validateConfirmationCode()"></app-title>
+        <form #verificationForm="ngForm">
+          <p class="info-text">
+            Ingresa el código de verificación enviado a {{email}}
+          </p>
+          <div class="cVerification">
+            <input class="cVerification__input" type="number" id="c_number1" minlengh="0" maxlength="1" onkeyup="if (this.value.length == this.getAttribute('maxlength')) c_number2.focus()" 
+            name="c_number1" [(ngModel)]="c_number1" autocomplete="off">
+            <input class="cVerification__input" type="number" id="c_number2" maxlength="1" onkeyup="if (this.value.length == this.getAttribute('maxlength')) c_number3.focus() 
+            else c_number1.focus()" name="c_number2" [(ngModel)]="c_number2" autocomplete="off">
+            <input class="cVerification__input" type="number" id="c_number3" maxlength="1" onkeyup="if (this.value.length == this.getAttribute('maxlength')) c_number4.focus()
+            else c_number2.focus()"name="c_number3" [(ngModel)]="c_number3" autocomplete="off">
+            <input class="cVerification__input" type="number" id="c_number4" maxlength="1" onkeyup="if (this.value.length == this.getAttribute('maxlength')) c_number5.focus()
+            else c_number3.focus()" name="c_number4" [(ngModel)]="c_number4" autocomplete="off">
+            <input class="cVerification__input" type="number" id="c_number5" minlengh="0" maxlength="1" onkeyup="if (this.value.length == this.getAttribute('maxlength')) {c_number6.focus() }
+            else c_number4.focus()" name="c_number5" [(ngModel)]="c_number5" autocomplete="off">
+            <input class="cVerification__input" type="number" id="c_number6" maxlength="1" minlenght="0" onkeyup="if (this.value.length == this.getAttribute('maxlength')) {}else c_number5.focus()"
+            name="c_number6" [(ngModel)]="c_number6" autocomplete="off"/>
+          </div>
+          <div class="msg_alert">
+            <p for="sign-up_confirmation" class="accent" (click)="resendConfirmationEmail()">Pedir un código nuevo</p>
+          </div>
+        </form>
+      </div>
+      <div class="sing-up__btn">
+        <app-button [label]="'Continuar'" (click)="validateConfirmationCode()"></app-button>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>
